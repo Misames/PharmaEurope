@@ -37,6 +37,7 @@ nbdist/
 
 ### VisualStudioCode ###
 .vscode
+task.txt
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
