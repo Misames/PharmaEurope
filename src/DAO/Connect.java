@@ -1,3 +1,4 @@
+package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +7,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 /**
- *
+ * Class de connection
+ * à la bdd MySQL
  * @author François
  */
 public class Connect {
