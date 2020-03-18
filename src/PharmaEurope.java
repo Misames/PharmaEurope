@@ -9,9 +9,10 @@ public class PharmaEurope {
     /**
      * @param args the command line arguments
      * @throws SQLException
-     * @throws java.lang.ClassNotFoundException
      */
-    public static void main(final String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println("Hello world");
+    public static void main(final String[] args) throws ClassNotFoundException, SQLException {
+        System.out.println("Appli principale");
+        Connect t1 = new Connect();
+        t1.pingBdd();
     }
 }
