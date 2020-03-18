@@ -3,7 +3,7 @@ import DAO.*;
 import java.sql.SQLException;
 
 /**
- *
+ * App PharmaEurope
  * @author François Bouscaillou
  */
 public class PharmaEurope {
@@ -14,7 +14,7 @@ public class PharmaEurope {
      * @throws SQLException
      */
     public static void main(final String[] args) throws ClassNotFoundException, SQLException {
-        System.out.println("Appli principale");
+        System.out.println("Application PharmaEurope");
         Connect t1 = new Connect();
         t1.pingBdd();
         Menu menu = new Menu();

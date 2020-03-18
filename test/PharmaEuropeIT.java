@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
+ * Class de test unitaire
+ * de l'application
  * @author François
  */
 public class PharmaEuropeIT {
