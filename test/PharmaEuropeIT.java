@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,9 +49,11 @@ public class PharmaEuropeIT {
 
     /**
      * Test of main method, of class PharmaEurope.
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
     @Test
-    public void testMain() {
+    public void testMain() throws ClassNotFoundException, SQLException {
         System.out.println("main");
         String[] args = null;
         PharmaEurope.main(args);
