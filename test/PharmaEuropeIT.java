@@ -1,59 +1,46 @@
-import java.sql.SQLException;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
- * Class de test unitaire
- * de l'application
+ *
  * @author François
  */
 public class PharmaEuropeIT {
     
-    /**
-     *
-     */
     public PharmaEuropeIT() {
     }
     
-    /**
-     *
-     */
-    @BeforeAll
+    @BeforeClass
     public static void setUpClass() {
     }
     
-    /**
-     *
-     */
-    @AfterAll
+    @AfterClass
     public static void tearDownClass() {
     }
     
-    /**
-     *
-     */
-    @BeforeEach
+    @Before
     public void setUp() {
     }
     
-    /**
-     *
-     */
-    @AfterEach
+    @After
     public void tearDown() {
     }
 
     /**
      * Test of main method, of class PharmaEurope.
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.sql.SQLException
      */
     @Test
-    public void testMain() throws ClassNotFoundException, SQLException {
+    public void testMain() throws Exception {
         System.out.println("main");
         String[] args = null;
         PharmaEurope.main(args);

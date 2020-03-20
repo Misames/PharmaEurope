@@ -38,7 +38,7 @@ public class Connect {
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         rs.next();
-        String cp = rs.getString("VIS_CP");
+        String cp = rs.getString("VIS_VILLE");
         System.out.println(cp);
     }
 }
