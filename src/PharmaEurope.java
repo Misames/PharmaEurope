@@ -1,4 +1,4 @@
-import IHM.Menu;
+import IHM.*;
 import DAO.*;
 import java.sql.SQLException;
 
