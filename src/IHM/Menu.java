@@ -1,11 +1,7 @@
 package IHM;
 
 import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
-
-import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
-
 import DAO.Connect;
 
 /**
@@ -33,11 +29,8 @@ public class Menu extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
-    private void initComponents() throws ClassNotFoundException {
-
-        // rajout personnelle
-        MySQL = new Connect();
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
         Valider = new javax.swing.JButton();
         ChampMdp = new javax.swing.JTextField();
@@ -54,8 +47,7 @@ public class Menu extends javax.swing.JFrame {
 
                 try {
                     ValiderActionPerformed(evt);
-                } catch (Exception e) {
-                    // TODO: handle exception
+                } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
             }
@@ -63,37 +55,42 @@ public class Menu extends javax.swing.JFrame {
 
         LabelIdentifient.setText("Identifiant");
 
-        LabelMdp.setText("Mot de passe");
+        LabelMdp.setText("Code secret");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup().addGap(161, 161, 161)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Valider, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ChampMdp).addComponent(ChampIdentifiant)
-                                .addComponent(LabelIdentifient, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(LabelMdp, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(171, Short.MAX_VALUE)));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap(58, Short.MAX_VALUE).addComponent(LabelIdentifient)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ChampIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21).addComponent(LabelMdp)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ChampMdp, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63).addComponent(Valider).addGap(53, 53, 53)));
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(161, 161, 161)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Valider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ChampMdp)
+                    .addComponent(ChampIdentifiant)
+                    .addComponent(LabelIdentifient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LabelMdp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addComponent(LabelIdentifient)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ChampIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(LabelMdp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ChampMdp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(Valider)
+                .addGap(53, 53, 53))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_ValiderActionPerformed
+    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_ValiderActionPerformed
         // TODO add your handling code here:
         System.out.println("click");
 
@@ -104,10 +101,10 @@ public class Menu extends javax.swing.JFrame {
 
         // tester avec la bdd
         if (!MySQL.connexion(id, mdp)) {
-            System.out.println("retry");
-            
+            System.out.println("log : erreur dans l'autentification");
+            JOptionPane.showMessageDialog(this, "erreur dans l'autentification");
         } else {
-            System.out.println("Menu principale :D");
+            System.out.println("log : Menu principale");
         }
 
         System.out.println("fin de l'event");

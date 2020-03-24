@@ -75,7 +75,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="LabelMdp">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mot de passe"/>
+        <Property name="text" type="java.lang.String" value="Code secret"/>
       </Properties>
     </Component>
   </SubComponents>

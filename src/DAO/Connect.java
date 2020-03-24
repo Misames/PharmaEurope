@@ -14,13 +14,13 @@ import LesClasses.Praticien;
  */
 public class Connect {
 
-    String url = "jdbc:mysql://localhost:3306/pharmaeurope?serverTimezone=UTC";
-    String utilisateur = "root";
-    String motDePasse = "root";
+    private String url = "jdbc:mysql://localhost:3306/pharmaeurope?serverTimezone=UTC";
+    private String utilisateur = "root";
+    private String motDePasse = "root";
 
-    Connection connexion = null;
-    Statement stmt = null;
-    ResultSet rs = null;
+    private Connection connexion = null;
+    private Statement stmt = null;
+    private ResultSet rs = null;
 
     public Connect() throws ClassNotFoundException {
         try {
@@ -36,7 +36,6 @@ public class Connect {
     }
 
     // En attendant les class DAO
-
     public boolean connexion(String id, String mdp) throws SQLException {
         String sql = "SELECT * FROM pharmaeurope.visiteur WHERE VIS_NOM = '" + id + "' AND VIS_DATEEMBAUCHE = '" + mdp
                 + "'";
@@ -45,7 +44,7 @@ public class Connect {
         return rs.next();
     }
 
-    public Praticien getFirstPra() throws SQLException, ClassNotFoundException {
+    public Praticien getFirstPra() throws SQLException {
         Praticien res = null;
         String sql = "SELECT * FROM praticien";
         stmt = connexion.createStatement();

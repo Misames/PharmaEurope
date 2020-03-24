@@ -15,33 +15,22 @@ public class Praticien {
     private float praCoefnotoriete;
     private String typeCode;
 
-    /**
-     * 
-     * @param num
-     * @param nom
-     * @param prenom
-     * @param adresse
-     * @param cp
-     * @param ville
-     * @param coef
-     * @param type
-     */
-    public Praticien(String num, String nom, String prenom, String adresse, String cp, String ville, float coef, String type) {
-        praNum = num;
-        praNom = nom;
-        praPrenom = prenom;
-        praAdresse = adresse;
-        praCP = cp;
-        praVille = ville;
-        praCoefnotoriete = coef;
-        typeCode = type;
-        System.out.println("Nouveau praticien !");
-    }
+    public Praticien(String num, String nom, String prenom, String adresse, String cp, String ville, float coef,
+            String type) {
 
-    /**
-     * @return Le nom du Praticien 
-     */
-    public String getNom() {
-        return this.praNom;
+        try {
+            praNum = num;
+            praNom = nom;
+            praPrenom = prenom;
+            praAdresse = adresse;
+            praCP = cp;
+            praVille = ville;
+            praCoefnotoriete = coef;
+            typeCode = type;
+            System.out.println("Nouveau praticien !");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
