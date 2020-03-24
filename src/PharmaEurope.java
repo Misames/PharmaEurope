@@ -1,6 +1,4 @@
 import IHM.*;
-import LesClasses.Praticien;
-import DAO.*;
 import java.sql.SQLException;
 
 /**

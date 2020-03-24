@@ -4,13 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
-import LesClasses.Praticien;
-
 import java.sql.ResultSet;
+import LesClasses.Praticien;
 
 /**
  * Class de connection à la bdd MySQL
@@ -31,7 +26,7 @@ public class Connect {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-            System.out.println("MySQL connecté ...");
+            System.out.println("log : MySQL connecté");
         } catch (SQLException ex) {
             /* Gérer les éventuelles erreurs ici */
             System.out.println("SQLException: " + ex.getMessage());
@@ -43,7 +38,8 @@ public class Connect {
     // En attendant les class DAO
 
     public boolean connexion(String id, String mdp) throws SQLException {
-        String sql = "SELECT * FROM pharmaeurope.visiteur WHERE VIS_NOM = '" + id + "' AND VIS_DATEEMBAUCHE = '"+ mdp + "'";
+        String sql = "SELECT * FROM pharmaeurope.visiteur WHERE VIS_NOM = '" + id + "' AND VIS_DATEEMBAUCHE = '" + mdp
+                + "'";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         return rs.next();
@@ -66,19 +62,5 @@ public class Connect {
             res = new Praticien(num, nom, prenom, adresse, cp, ville, coef, type);
         }
         return res;
-    }
-
-    /**
-     * Méthode de test de la bdd
-     * 
-     * @throws SQLException
-     */
-    public void pingBdd() throws SQLException {
-        String sql = "SELECT * FROM pharmaeurope.visiteur";
-        stmt = connexion.createStatement();
-        rs = stmt.executeQuery(sql);
-        rs.next();
-        String cp = rs.getString("VIS_VILLE");
-        System.out.println(cp);
     }
 }
