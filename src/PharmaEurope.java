@@ -1,4 +1,5 @@
 import IHM.*;
+import LesClasses.Praticien;
 import DAO.*;
 import java.sql.SQLException;
 
@@ -15,9 +16,8 @@ public class PharmaEurope {
      */
     public static void main(final String[] args) throws ClassNotFoundException, SQLException {
         System.out.println("Application PharmaEurope");
-        Connect t1 = new Connect();
-        t1.pingBdd();
-        Menu menu = new Menu();
-        menu.setVisible(true);
+        Connect MySQL = new Connect();
+        Praticien test = MySQL.getFirstPra();
+        System.out.println("Fini");
     }
 }
