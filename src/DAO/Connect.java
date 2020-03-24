@@ -42,6 +42,13 @@ public class Connect {
 
     // En attendant les class DAO
 
+    public boolean connexion(String id, String mdp) throws SQLException {
+        String sql = "SELECT * FROM pharmaeurope.visiteur WHERE VIS_NOM = '" + id + "' AND VIS_DATEEMBAUCHE = '"+ mdp + "'";
+        stmt = connexion.createStatement();
+        rs = stmt.executeQuery(sql);
+        return rs.next();
+    }
+
     public Praticien getFirstPra() throws SQLException, ClassNotFoundException {
         Praticien res = null;
         String sql = "SELECT * FROM praticien";

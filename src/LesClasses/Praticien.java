@@ -1,11 +1,5 @@
 package LesClasses;
 
-import java.sql.SQLException;
-
-import javax.print.DocFlavor.STRING;
-
-import DAO.Connect;
-
 /**
  * 
  * @author François
@@ -21,7 +15,18 @@ public class Praticien {
     private float praCoefnotoriete;
     private String typeCode;
 
-    public Praticien(String num, String nom, String prenom, String adresse,String  cp,String  ville, float coef, String type) throws ClassNotFoundException, SQLException {
+    /**
+     * 
+     * @param num
+     * @param nom
+     * @param prenom
+     * @param adresse
+     * @param cp
+     * @param ville
+     * @param coef
+     * @param type
+     */
+    public Praticien(String num, String nom, String prenom, String adresse, String cp, String ville, float coef, String type) {
         praNum = num;
         praNom = nom;
         praPrenom = prenom;
@@ -33,6 +38,9 @@ public class Praticien {
         System.out.println("Nouveau praticien !");
     }
 
+    /**
+     * @return Le nom du Praticien 
+     */
     public String getNom() {
         return this.praNom;
     }

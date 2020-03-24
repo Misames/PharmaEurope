@@ -16,8 +16,7 @@ public class PharmaEurope {
      */
     public static void main(final String[] args) throws ClassNotFoundException, SQLException {
         System.out.println("Application PharmaEurope");
-        Connect MySQL = new Connect();
-        Praticien test = MySQL.getFirstPra();
-        System.out.println("Fini");
+        Menu login = new Menu();
+        login.setVisible(true);
     }
 }
