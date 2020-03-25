@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import LesClasses.Praticien;
 
 /**
  * Class de connection à la bdd MySQL
@@ -14,13 +13,13 @@ import LesClasses.Praticien;
  */
 public class Connect {
 
-    private String url = "jdbc:mysql://localhost:3306/pharmaeurope?serverTimezone=UTC";
-    private String utilisateur = "root";
-    private String motDePasse = "root";
+    protected String url = "jdbc:mysql://localhost:3306/pharmaeurope?serverTimezone=UTC";
+    protected String utilisateur = "root";
+    protected String motDePasse = "root";
 
-    private Connection connexion = null;
-    private Statement stmt = null;
-    private ResultSet rs = null;
+    protected Connection connexion = null;
+    protected Statement stmt = null;
+    protected ResultSet rs = null;
 
     public Connect() throws ClassNotFoundException {
         try {
@@ -42,24 +41,5 @@ public class Connect {
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         return rs.next();
-    }
-
-    public Praticien getFirstPra() throws SQLException {
-        Praticien res = null;
-        String sql = "SELECT * FROM praticien";
-        stmt = connexion.createStatement();
-        rs = stmt.executeQuery(sql);
-        if (rs.next()) {
-            String num = rs.getString("PRA_NUM");
-            String nom = rs.getString("PRA_NOM");
-            String prenom = rs.getString("PRA_PRENOM");
-            String adresse = rs.getString("PRA_ADRESSE");
-            String cp = rs.getString("PRA_CP");
-            String ville = rs.getString("PRA_VILLE");
-            float coef = rs.getFloat("PRA_COEFNOTORIETE");
-            String type = rs.getString("TYP_CODE");
-            res = new Praticien(num, nom, prenom, adresse, cp, ville, coef, type);
-        }
-        return res;
     }
 }

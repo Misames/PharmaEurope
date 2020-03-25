@@ -2,7 +2,7 @@ package IHM;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import DAO.Connect;
+import DAO.PraticienDAO;
 
 /**
  *
@@ -91,23 +91,26 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_ValiderActionPerformed
-        // TODO add your handling code here:
-        System.out.println("click");
+
+        System.out.println("log : clic");
 
         // recup data des form
         String mdp = ChampMdp.getText();
         String id = ChampIdentifiant.getText();
-        System.out.println(mdp + " / " + id);
+        System.out.println("log : Mdp : " + mdp + " / id :" + id);
 
-        // tester avec la bdd
-        if (!MySQL.connexion(id, mdp)) {
+        // tester les identifiants
+        if (!praticienDAO.connexion(id, mdp)) {
             System.out.println("log : erreur dans l'autentification");
             JOptionPane.showMessageDialog(this, "erreur dans l'autentification");
         } else {
             System.out.println("log : Menu principale");
+            Accueil accueil = new Accueil();
+            accueil.setVisible(true);
+            this.setVisible(false);
         }
 
-        System.out.println("fin de l'event");
+        System.out.println("log : fin clic");
 
     }// GEN-LAST:event_ValiderActionPerformed
 
@@ -147,7 +150,6 @@ public class Menu extends javax.swing.JFrame {
                 try {
                     new Menu().setVisible(true);
                 } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -161,5 +163,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel LabelMdp;
     private javax.swing.JButton Valider;
     // End of variables declaration//GEN-END:variables
-    private Connect MySQL;
+    
+    // data
+    private PraticienDAO praticienDAO = new PraticienDAO();
 }
