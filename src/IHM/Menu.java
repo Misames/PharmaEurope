@@ -35,6 +35,8 @@ public class Menu extends javax.swing.JFrame {
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PraticienDAO praticienDAO;
+
         Valider = new javax.swing.JButton();
         ChampMdp = new javax.swing.JTextField();
         ChampIdentifiant = new javax.swing.JTextField();
