@@ -13,9 +13,9 @@ import java.sql.ResultSet;
  */
 public class Connect {
 
-    private static String url = "jdbc:mysql://localhost:3306/pharmaeurope?serverTimezone=UTC";
+    private static String url = "jdbc:mysql://192.168.1.10:3306/pharmaeurope?serverTimezone=UTC";
     private static String utilisateur = "root";
-    private static String motDePasse = "root";
+    private static String motDePasse = "123456789123456789";
 
     private static Connection connexion = null;
     private static Statement stmt = null;
