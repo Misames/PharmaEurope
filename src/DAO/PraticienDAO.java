@@ -1,17 +1,20 @@
 package DAO;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
-
 import LesClasses.Praticien;
 
 /**
  * PraticienDAO
  */
-public class PraticienDAO extends Connect {
+public class PraticienDAO {
 
-    public PraticienDAO() throws ClassNotFoundException {
+    private Connection connexion = null;
+    private Statement stmt = null;
+    private ResultSet rs = null;
 
+    public PraticienDAO() throws ClassNotFoundException, SQLException {
+        connexion = Connect.getConnexion();
     }
 
     public ArrayList<Praticien> getLesPraticien() {

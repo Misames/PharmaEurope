@@ -33,4 +33,8 @@ public class Praticien {
         }
 
     }
+
+    public String getNom() {
+        return praNom;
+    }
 }
