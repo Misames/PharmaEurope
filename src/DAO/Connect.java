@@ -13,13 +13,13 @@ import java.sql.ResultSet;
  */
 public class Connect {
 
-    protected String url = "jdbc:mysql://localhost:3306/pharmaeurope?serverTimezone=UTC";
-    protected String utilisateur = "root";
-    protected String motDePasse = "root";
+    private static String url = "jdbc:mysql://192.168.1.10:3306/pharmaeurope?serverTimezone=UTC";
+    private static String utilisateur = "root";
+    private static String motDePasse = "123456789123456789";
 
-    protected Connection connexion = null;
-    protected Statement stmt = null;
-    protected ResultSet rs = null;
+    private static Connection connexion = null;
+    private static Statement stmt = null;
+    private static ResultSet rs = null;
 
     public Connect() throws ClassNotFoundException {
         try {
@@ -34,12 +34,20 @@ public class Connect {
         }
     }
 
-    // En attendant les class DAO
-    public boolean connexion(String id, String mdp) throws SQLException {
+    public static boolean connexion(String id, String mdp) throws SQLException {
         String sql = "SELECT * FROM pharmaeurope.visiteur WHERE VIS_NOM = '" + id + "' AND VIS_DATEEMBAUCHE = '" + mdp
                 + "'";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         return rs.next();
     }
+
+    public static Connection getConnexion() throws SQLException {
+        if (connexion == null) {
+            connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+            System.out.println("log : MySQL connecté");
+        }
+        return connexion;
+    }
 }
+ 

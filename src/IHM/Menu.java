@@ -2,6 +2,8 @@ package IHM;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
+import DAO.Connect;
 import DAO.PraticienDAO;
 
 /**
@@ -29,8 +31,15 @@ public class Menu extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        try {
+            praticienDAO = new PraticienDAO();
+        } catch (ClassNotFoundException | SQLException e1) {
+            e1.printStackTrace();
+        }
 
         Valider = new javax.swing.JButton();
         ChampMdp = new javax.swing.JTextField();
@@ -100,7 +109,7 @@ public class Menu extends javax.swing.JFrame {
         System.out.println("log : Mdp : " + mdp + " / id :" + id);
 
         // tester les identifiants
-        if (!praticienDAO.connexion(id, mdp)) {
+        if (!Connect.connexion(id, mdp)) {
             System.out.println("log : erreur dans l'autentification");
             JOptionPane.showMessageDialog(this, "erreur dans l'autentification");
         } else {
@@ -165,5 +174,5 @@ public class Menu extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     // data
-    private PraticienDAO praticienDAO = new PraticienDAO();
+    private PraticienDAO praticienDAO;
 }
