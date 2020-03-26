@@ -37,6 +37,7 @@ nbdist/
 
 ### VisualStudioCode ###
 .vscode
+src/temp/
 task.txt
 
 ### VisualStudioCode Patch ###
