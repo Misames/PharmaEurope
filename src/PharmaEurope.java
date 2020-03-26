@@ -1,8 +1,4 @@
-import java.sql.SQLException;
-
-import DAO.PraticienDAO;
 import IHM.*;
-import LesClasses.Praticien;
 
 /**
  * App PharmaEurope
@@ -13,15 +9,14 @@ public class PharmaEurope {
 
     /**
      * @param args the command line arguments
-     * @throws java.lang.ClassNotFoundException
-     * @throws SQLException
      */
-    public static void main(final String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(final String[] args) {
         System.out.println("Application PharmaEurope");
-        PraticienDAO praDAO = new PraticienDAO();
-        Praticien praticien = praDAO.getFirstPra();
-        System.out.println(praticien.getNom());
-        /* Menu login = new Menu();
-        login.setVisible(true); */
+        try {
+            Menu login = new Menu();
+            login.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
