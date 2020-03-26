@@ -12,6 +12,9 @@ import DAO.PraticienDAO;
  */
 public class Menu extends javax.swing.JFrame {
 
+
+    private PraticienDAO praticienDAO;
+
     /**
      * Creates new form Menu
      * 
@@ -37,7 +40,7 @@ public class Menu extends javax.swing.JFrame {
 
         try {
             praticienDAO = new PraticienDAO();
-        } catch (ClassNotFoundException | SQLException e1) {
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
 
@@ -103,7 +106,7 @@ public class Menu extends javax.swing.JFrame {
 
         System.out.println("log : clic");
 
-        // recup data des form
+        // recup données des forms
         String mdp = ChampMdp.getText();
         String id = ChampIdentifiant.getText();
         System.out.println("log : Mdp : " + mdp + " / id :" + id);
@@ -118,9 +121,7 @@ public class Menu extends javax.swing.JFrame {
             accueil.setVisible(true);
             this.setVisible(false);
         }
-
         System.out.println("log : fin clic");
-
     }// GEN-LAST:event_ValiderActionPerformed
 
     /**
@@ -172,7 +173,4 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel LabelMdp;
     private javax.swing.JButton Valider;
     // End of variables declaration//GEN-END:variables
-    
-    // data
-    private PraticienDAO praticienDAO;
 }

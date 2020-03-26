@@ -13,8 +13,12 @@ public class PraticienDAO {
     private Statement stmt = null;
     private ResultSet rs = null;
 
-    public PraticienDAO() throws ClassNotFoundException, SQLException {
-        connexion = Connect.getConnexion();
+    public PraticienDAO() {
+        try {
+            connexion = Connect.getConnexion();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public ArrayList<Praticien> getLesPraticien() {
@@ -24,7 +28,7 @@ public class PraticienDAO {
     /**
      * Retourne le premier Praticien de la liste ou null si la table est vide
      * 
-     * @return Praticien
+     * @return Praticien | null
      * @throws SQLException
      */
     public Praticien getFirstPra() throws SQLException {
