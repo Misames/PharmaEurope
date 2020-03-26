@@ -13,24 +13,25 @@ import java.sql.ResultSet;
  */
 public class Connect {
 
-    private static String url = "jdbc:mysql://192.168.1.10:3306/pharmaeurope?serverTimezone=UTC";
+    private static String url = "jdbc:mysql://localhost:3306/pharmaeurope?serverTimezone=UTC";
     private static String utilisateur = "root";
-    private static String motDePasse = "123456789123456789";
+    private static String motDePasse = "root";
 
     private static Connection connexion = null;
     private static Statement stmt = null;
     private static ResultSet rs = null;
 
-    public Connect() throws ClassNotFoundException {
+    public Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-            System.out.println("log : MySQL connecté");
+            System.out.println("log : MySQL connecté from the class");
         } catch (SQLException ex) {
-            /* Gérer les éventuelles erreurs ici */
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -45,9 +46,8 @@ public class Connect {
     public static Connection getConnexion() throws SQLException {
         if (connexion == null) {
             connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-            System.out.println("log : MySQL connecté");
+            System.out.println("log : MySQL connecté from getter");
         }
         return connexion;
     }
 }
- 

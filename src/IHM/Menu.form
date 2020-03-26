@@ -28,10 +28,10 @@
               <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="Valider" max="32767" attributes="0"/>
-                  <Component id="ChampMdp" max="32767" attributes="0"/>
                   <Component id="ChampIdentifiant" max="32767" attributes="0"/>
                   <Component id="LabelIdentifient" max="32767" attributes="0"/>
                   <Component id="LabelMdp" max="32767" attributes="0"/>
+                  <Component id="ChampMdp" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="171" max="32767" attributes="0"/>
           </Group>
@@ -46,9 +46,9 @@
               <Component id="ChampIdentifiant" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Component id="LabelMdp" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="ChampMdp" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="Valider" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
           </Group>
@@ -64,8 +64,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ValiderActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="ChampMdp">
-    </Component>
     <Component class="javax.swing.JTextField" name="ChampIdentifiant">
     </Component>
     <Component class="javax.swing.JLabel" name="LabelIdentifient">
@@ -77,6 +75,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Code secret"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ChampMdp">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChampMdpActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

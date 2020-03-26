@@ -1,17 +1,19 @@
 package IHM;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import DAO.Connect;
-import DAO.PraticienDAO;
-import IHM.Accueil;
 
 /**
  *
  * @author François
  */
 public class Menu extends javax.swing.JFrame {
+
+     // data
+    private Connection connexion;
 
     /**
      * Creates new form Menu
@@ -34,16 +36,20 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
-    private void initComponents() throws ClassNotFoundException, SQLException {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-        praticienDAO = new PraticienDAO();
+        try {
+            connexion = Connect.getConnexion();
+        } catch (SQLException e1) {
+            System.out.println(e1.getMessage());
+        }
 
         Valider = new javax.swing.JButton();
-        ChampMdp = new javax.swing.JTextField();
         ChampIdentifiant = new javax.swing.JTextField();
         LabelIdentifient = new javax.swing.JLabel();
         LabelMdp = new javax.swing.JLabel();
+        ChampMdp = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu  - PharmaEurope");
@@ -51,7 +57,6 @@ public class Menu extends javax.swing.JFrame {
         Valider.setText("Valider");
         Valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-
                 try {
                     ValiderActionPerformed(evt);
                 } catch (SQLException e) {
@@ -64,6 +69,12 @@ public class Menu extends javax.swing.JFrame {
 
         LabelMdp.setText("Code secret");
 
+        ChampMdp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChampMdpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,10 +83,10 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(161, 161, 161)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Valider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ChampMdp)
                     .addComponent(ChampIdentifiant)
                     .addComponent(LabelIdentifient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LabelMdp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LabelMdp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ChampMdp))
                 .addContainerGap(171, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -87,15 +98,19 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(ChampIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(LabelMdp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addComponent(ChampMdp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(31, 31, 31)
                 .addComponent(Valider)
                 .addGap(53, 53, 53))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ChampMdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChampMdpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChampMdpActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_ValiderActionPerformed
 
@@ -104,17 +119,21 @@ public class Menu extends javax.swing.JFrame {
         // recup data des form
         String mdp = ChampMdp.getText();
         String id = ChampIdentifiant.getText();
-        System.out.println("log : Mdp : " + mdp + " / id :" + id);
+        System.out.println("log : Mdp : " + mdp.toString() + " / id :" + id);
 
-        // tester les identifiants
-        if (!Connect.connexion(id, mdp)) {
-            System.out.println("log : erreur dans l'autentification");
-            JOptionPane.showMessageDialog(this, "erreur dans l'autentification");
-        } else {
-            System.out.println("log : Menu principale");
-            Accueil accueil = new Accueil();
-            accueil.setVisible(true);
-            this.setVisible(false);
+        try {
+            // tester les identifiants
+            if (!Connect.connexion(id, mdp)) {
+                System.out.println("log : erreur dans l'autentification");
+                JOptionPane.showMessageDialog(this, "erreur dans l'autentification");
+            } else {
+                System.out.println("log : Menu principale");
+                Accueil accueil = new Accueil();
+                accueil.setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Saisir un le bon mot de passe");
         }
 
         System.out.println("log : fin clic");
@@ -172,7 +191,4 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel LabelMdp;
     private javax.swing.JButton Valider;
     // End of variables declaration//GEN-END:variables
-    
-    // data
-    private PraticienDAO praticienDAO;
 }
