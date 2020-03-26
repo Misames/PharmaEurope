@@ -18,6 +18,12 @@ public class PraticienDAO extends Connect {
         return null;
     }
 
+    /**
+     * Retourne le premier Praticien de la liste ou null si la table est vide
+     * 
+     * @return Praticien
+     * @throws SQLException
+     */
     public Praticien getFirstPra() throws SQLException {
         Praticien res = null;
         String sql = "SELECT * FROM praticien";
