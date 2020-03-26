@@ -12,9 +12,6 @@ import DAO.PraticienDAO;
  */
 public class Menu extends javax.swing.JFrame {
 
-
-    private PraticienDAO praticienDAO;
-
     /**
      * Creates new form Menu
      * 
@@ -38,12 +35,6 @@ public class Menu extends javax.swing.JFrame {
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        try {
-            praticienDAO = new PraticienDAO();
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-
         Valider = new javax.swing.JButton();
         ChampMdp = new javax.swing.JTextField();
         ChampIdentifiant = new javax.swing.JTextField();
@@ -57,11 +48,7 @@ public class Menu extends javax.swing.JFrame {
         Valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-                try {
-                    ValiderActionPerformed(evt);
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                }
+                ValiderActionPerformed(evt);
             }
         });
 
@@ -71,38 +58,33 @@ public class Menu extends javax.swing.JFrame {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Valider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ChampMdp)
-                    .addComponent(ChampIdentifiant)
-                    .addComponent(LabelIdentifient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LabelMdp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(171, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addComponent(LabelIdentifient)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ChampIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(LabelMdp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ChampMdp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addComponent(Valider)
-                .addGap(53, 53, 53))
-        );
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup().addGap(161, 161, 161)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Valider, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ChampMdp).addComponent(ChampIdentifiant)
+                                .addComponent(LabelIdentifient, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LabelMdp, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(171, Short.MAX_VALUE)));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                javax.swing.GroupLayout.Alignment.TRAILING,
+                layout.createSequentialGroup().addContainerGap(58, Short.MAX_VALUE).addComponent(LabelIdentifient)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChampIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21).addComponent(LabelMdp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChampMdp, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63).addComponent(Valider).addGap(53, 53, 53)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_ValiderActionPerformed
+    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ValiderActionPerformed
 
         System.out.println("log : clic");
 
@@ -112,15 +94,21 @@ public class Menu extends javax.swing.JFrame {
         System.out.println("log : Mdp : " + mdp + " / id :" + id);
 
         // tester les identifiants
-        if (!Connect.connexion(id, mdp)) {
-            System.out.println("log : erreur dans l'autentification");
-            JOptionPane.showMessageDialog(this, "erreur dans l'autentification");
-        } else {
-            System.out.println("log : Menu principale");
-            Accueil accueil = new Accueil();
-            accueil.setVisible(true);
-            this.setVisible(false);
+        try {
+            if (!Connect.connexion(id, mdp)) {
+                System.out.println("log : erreur dans l'autentification");
+                JOptionPane.showMessageDialog(this, "erreur dans l'autentification");
+            } else {
+                System.out.println("log : Menu principale");
+                Accueil accueil = new Accueil();
+                accueil.setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "erreur du code secret");
         }
+
         System.out.println("log : fin clic");
     }// GEN-LAST:event_ValiderActionPerformed
 
