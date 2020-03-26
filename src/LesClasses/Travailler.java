@@ -2,8 +2,6 @@ package LesClasses;
 
 import java.util.Date;
 
-import javax.swing.plaf.synth.Region;
-
 /**
  * Travailler
  */
