@@ -35,6 +35,118 @@ public class Praticien {
     }
 
     public String getNom() {
+        return getPraNom();
+    }
+
+    /**
+     * @return the praNum
+     */
+    public String getPraNum() {
+        return praNum;
+    }
+
+    /**
+     * @param praNum the praNum to set
+     */
+    public void setPraNum(String praNum) {
+        this.praNum = praNum;
+    }
+
+    /**
+     * @return the praNom
+     */
+    public String getPraNom() {
         return praNom;
+    }
+
+    /**
+     * @param praNom the praNom to set
+     */
+    public void setPraNom(String praNom) {
+        this.praNom = praNom;
+    }
+
+    /**
+     * @return the praPrenom
+     */
+    public String getPraPrenom() {
+        return praPrenom;
+    }
+
+    /**
+     * @param praPrenom the praPrenom to set
+     */
+    public void setPraPrenom(String praPrenom) {
+        this.praPrenom = praPrenom;
+    }
+
+    /**
+     * @return the praAdresse
+     */
+    public String getPraAdresse() {
+        return praAdresse;
+    }
+
+    /**
+     * @param praAdresse the praAdresse to set
+     */
+    public void setPraAdresse(String praAdresse) {
+        this.praAdresse = praAdresse;
+    }
+
+    /**
+     * @return the praCP
+     */
+    public String getPraCP() {
+        return praCP;
+    }
+
+    /**
+     * @param praCP the praCP to set
+     */
+    public void setPraCP(String praCP) {
+        this.praCP = praCP;
+    }
+
+    /**
+     * @return the praVille
+     */
+    public String getPraVille() {
+        return praVille;
+    }
+
+    /**
+     * @param praVille the praVille to set
+     */
+    public void setPraVille(String praVille) {
+        this.praVille = praVille;
+    }
+
+    /**
+     * @return the praCoefnotoriete
+     */
+    public float getPraCoefnotoriete() {
+        return praCoefnotoriete;
+    }
+
+    /**
+     * @param praCoefnotoriete the praCoefnotoriete to set
+     */
+    public void setPraCoefnotoriete(float praCoefnotoriete) {
+        this.praCoefnotoriete = praCoefnotoriete;
+    }
+
+    /**
+     * @return the typeCode
+     */
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    /**
+     * @param typeCode the typeCode to set
+     */
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
     }
 }
