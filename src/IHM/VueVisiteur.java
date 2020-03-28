@@ -2,8 +2,6 @@ package IHM;
 
 import java.sql.SQLException;
 
-import javax.swing.ComboBoxModel;
-
 import DAO.PraticienDAO;
 import LesClasses.Praticien;
 import LesClasses.Visiteur;
