@@ -14,4 +14,28 @@ public class Region {
         regCode = code;
         regCode = nom;
     }
+
+    public Secteur getRegSecteur() {
+        return regSecteur;
+    }
+
+    public void setRegSecteur(Secteur regSecteur) {
+        this.regSecteur = regSecteur;
+    }
+
+    public String getRegCode() {
+        return regCode;
+    }
+
+    public void setRegCode(String regCode) {
+        this.regCode = regCode;
+    }
+
+    public String getRegNom() {
+        return regNom;
+    }
+
+    public void setRegNom(String regNom) {
+        this.regNom = regNom;
+    }
 }

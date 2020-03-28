@@ -57,13 +57,7 @@ public class VueVisiteur extends javax.swing.JFrame {
         LstVis = new javax.swing.JComboBox<>();
         BtnAjout = new javax.swing.JButton();
         BtnEnregistre = new javax.swing.JButton();
-
-        // Affichage du premier visiteur
-        TxtNom.setText(unPrat.getNom());
-        TxtPrenom.setText(unPrat.getPraPrenom());
-        TxtAdresse.setText(unPrat.getPraAdresse());
-        TxtCp.setText(unPrat.getPraCP());
-        TxtVille.setText(unPrat.getPraVille());
+        BtnSuppr = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Visiteurs");
@@ -120,6 +114,13 @@ public class VueVisiteur extends javax.swing.JFrame {
 
         BtnEnregistre.setText("Enregistrer");
 
+        BtnSuppr.setText("Supprimer");
+        BtnSuppr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSupprActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,8 +167,10 @@ public class VueVisiteur extends javax.swing.JFrame {
                         .addGap(225, 225, 225)
                         .addComponent(BtnEnregistre)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnAjout)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(BtnAjout)
+                        .addGap(28, 28, 28)
+                        .addComponent(BtnSuppr)))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +221,8 @@ public class VueVisiteur extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BtnEnregistre)
-                            .addComponent(BtnAjout))))
+                            .addComponent(BtnAjout)
+                            .addComponent(BtnSuppr))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -232,6 +236,10 @@ public class VueVisiteur extends javax.swing.JFrame {
     private void BtnAjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAjoutActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnAjoutActionPerformed
+
+    private void BtnSupprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSupprActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnSupprActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,6 +280,7 @@ public class VueVisiteur extends javax.swing.JFrame {
     private javax.swing.JButton BtnAjout;
     private javax.swing.JButton BtnEnregistre;
     private javax.swing.JButton BtnOk;
+    private javax.swing.JButton BtnSuppr;
     private javax.swing.JLabel LblAdresse;
     private javax.swing.JLabel LblChercher;
     private javax.swing.JLabel LblLabo;

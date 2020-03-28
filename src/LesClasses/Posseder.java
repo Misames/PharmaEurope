@@ -16,4 +16,36 @@ public class Posseder {
         posDiplome = diplome;
         posCoefPrescription = coef;
     }
+
+    public Specialite getSpePosseder() {
+        return spePosseder;
+    }
+
+    public void setSpePosseder(Specialite spePosseder) {
+        this.spePosseder = spePosseder;
+    }
+
+    public Praticien getLePraticien() {
+        return lePraticien;
+    }
+
+    public void setLePraticien(Praticien lePraticien) {
+        this.lePraticien = lePraticien;
+    }
+
+    public String getPosDiplome() {
+        return posDiplome;
+    }
+
+    public void setPosDiplome(String posDiplome) {
+        this.posDiplome = posDiplome;
+    }
+
+    public float getPosCoefPrescription() {
+        return posCoefPrescription;
+    }
+
+    public void setPosCoefPrescription(float posCoefPrescription) {
+        this.posCoefPrescription = posCoefPrescription;
+    }
 }

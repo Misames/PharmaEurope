@@ -13,4 +13,20 @@ public class Secteur {
         secLibelle = libelle;
     }
 
+    public String getSecCode() {
+        return secCode;
+    }
+
+    public void setSecCode(String secCode) {
+        this.secCode = secCode;
+    }
+
+    public String getSecLibelle() {
+        return secLibelle;
+    }
+
+    public void setSecLibelle(String secLibelle) {
+        this.secLibelle = secLibelle;
+    }
+
 }

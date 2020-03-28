@@ -13,4 +13,20 @@ public class Presentation {
         preLibelle = libelle;
     }
 
+    public String getPreCode() {
+        return preCode;
+    }
+
+    public void setPreCode(String preCode) {
+        this.preCode = preCode;
+    }
+
+    public String getPreLibelle() {
+        return preLibelle;
+    }
+
+    public void setPreLibelle(String preLibelle) {
+        this.preLibelle = preLibelle;
+    }
+
 }

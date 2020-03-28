@@ -1,9 +1,6 @@
 package DAO;
 
 import java.sql.*;
-import java.util.Date;
-import LesClasses.Labo;
-import LesClasses.Secteur;
 import LesClasses.Visiteur;
 
 /**

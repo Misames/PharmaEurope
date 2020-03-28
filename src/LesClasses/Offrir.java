@@ -15,4 +15,28 @@ public class Offrir {
         lesMedoc = medicaments;
         offQte = qte;
     }
+
+    public ArrayList<RapportVisite> getLesRapport() {
+        return lesRapport;
+    }
+
+    public void setLesRapport(ArrayList<RapportVisite> lesRapport) {
+        this.lesRapport = lesRapport;
+    }
+
+    public ArrayList<Medicament> getLesMedoc() {
+        return lesMedoc;
+    }
+
+    public void setLesMedoc(ArrayList<Medicament> lesMedoc) {
+        this.lesMedoc = lesMedoc;
+    }
+
+    public int getOffQte() {
+        return offQte;
+    }
+
+    public void setOffQte(int offQte) {
+        this.offQte = offQte;
+    }
 }

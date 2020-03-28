@@ -36,4 +36,76 @@ public class Visiteur {
             System.out.println(e.getMessage());
         }
     }
+
+    public Secteur getVisSecteur() {
+        return visSecteur;
+    }
+
+    public void setVisSecteur(Secteur visSecteur) {
+        this.visSecteur = visSecteur;
+    }
+
+    public Labo getVisLabo() {
+        return visLabo;
+    }
+
+    public void setVisLabo(Labo visLabo) {
+        this.visLabo = visLabo;
+    }
+
+    public Date getVisDateEnBauche() {
+        return visDateEnBauche;
+    }
+
+    public void setVisDateEnBauche(Date visDateEnBauche) {
+        this.visDateEnBauche = visDateEnBauche;
+    }
+
+    public String getVisMatricule() {
+        return visMatricule;
+    }
+
+    public void setVisMatricule(String visMatricule) {
+        this.visMatricule = visMatricule;
+    }
+
+    public String getVisNom() {
+        return visNom;
+    }
+
+    public void setVisNom(String visNom) {
+        this.visNom = visNom;
+    }
+
+    public String getVisPrenom() {
+        return visPrenom;
+    }
+
+    public void setVisPrenom(String visPrenom) {
+        this.visPrenom = visPrenom;
+    }
+
+    public String getVisAdresse() {
+        return visAdresse;
+    }
+
+    public void setVisAdresse(String visAdresse) {
+        this.visAdresse = visAdresse;
+    }
+
+    public String getVisCP() {
+        return visCP;
+    }
+
+    public void setVisCP(String visCP) {
+        this.visCP = visCP;
+    }
+
+    public String getVisVille() {
+        return visVille;
+    }
+
+    public void setVisVille(String visVille) {
+        this.visVille = visVille;
+    }
 }

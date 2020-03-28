@@ -15,4 +15,28 @@ public class Labo {
         labChefVente = chef;
     }
 
+    public String getLabCode() {
+        return labCode;
+    }
+
+    public void setLabCode(String labCode) {
+        this.labCode = labCode;
+    }
+
+    public String getLabNom() {
+        return labNom;
+    }
+
+    public void setLabNom(String labNom) {
+        this.labNom = labNom;
+    }
+
+    public String getLabChefVente() {
+        return labChefVente;
+    }
+
+    public void setLabChefVente(String labChefVente) {
+        this.labChefVente = labChefVente;
+    }
+
 }

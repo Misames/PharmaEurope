@@ -15,4 +15,28 @@ public class TypePracticien {
         typLieu = lieu;
     }
 
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+    }
+
+    public String getTypLibelle() {
+        return typLibelle;
+    }
+
+    public void setTypLibelle(String typLibelle) {
+        this.typLibelle = typLibelle;
+    }
+
+    public String getTypLieu() {
+        return typLieu;
+    }
+
+    public void setTypLieu(String typLieu) {
+        this.typLieu = typLieu;
+    }
+
 }

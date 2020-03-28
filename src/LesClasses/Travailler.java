@@ -18,4 +18,36 @@ public class Travailler {
         visiteur = vis;
         traRole = role;
     }
+
+    public Date getDateTrvailler() {
+        return dateTrvailler;
+    }
+
+    public void setDateTrvailler(Date dateTrvailler) {
+        this.dateTrvailler = dateTrvailler;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+    public Visiteur getVisiteur() {
+        return visiteur;
+    }
+
+    public void setVisiteur(Visiteur visiteur) {
+        this.visiteur = visiteur;
+    }
+
+    public String getTraRole() {
+        return traRole;
+    }
+
+    public void setTraRole(String traRole) {
+        this.traRole = traRole;
+    }
 }

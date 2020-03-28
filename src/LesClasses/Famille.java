@@ -13,4 +13,20 @@ public class Famille {
         famLibelle = libelle;
     }
 
+    public String getFamCode() {
+        return famCode;
+    }
+
+    public void setFamCode(String famCode) {
+        this.famCode = famCode;
+    }
+
+    public String getFamLibelle() {
+        return famLibelle;
+    }
+
+    public void setFamLibelle(String famLibelle) {
+        this.famLibelle = famLibelle;
+    }
+
 }
