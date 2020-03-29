@@ -300,7 +300,7 @@ public class VueVisiteur extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnOkActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnOkActionPerformed
-        // recup le visiteur == LstVis.getSelectedItem();
+        //BtnEnregistre.setEnabled(true);
         String name = (String) LstVis.getSelectedItem();
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Selectionner un visiteur");
@@ -352,9 +352,7 @@ public class VueVisiteur extends javax.swing.JFrame {
     }                                        
 
     private void LstVisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LstVisActionPerformed
-        // do something xD
-        BtnEnregistre.setEnabled(true);
-        BtnSuppr.setEnabled(true);
+
     }//GEN-LAST:event_LstVisActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

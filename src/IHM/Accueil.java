@@ -23,6 +23,13 @@ public class Accueil extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" Gestion des comptes");
+        addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+                formAncestorMoved(evt);
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+            }
+        });
 
         BtnCompteRendu.setText("Compte-rendus");
         BtnCompteRendu.addActionListener(new java.awt.event.ActionListener() {
@@ -60,10 +67,9 @@ public class Accueil extends javax.swing.JFrame {
                 .addContainerGap(157, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(BtnMedicament, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(BtnCompteRendu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnVisiteur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnPraticien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(BtnCompteRendu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnVisiteur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnPraticien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
@@ -84,25 +90,33 @@ public class Accueil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnCompteRenduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCompteRenduActionPerformed
-        // TODO add your handling code here:
+        VueRapportVis vueRapport = new VueRapportVis();
+        vueRapport.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnCompteRenduActionPerformed
 
     private void BtnMedicamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMedicamentActionPerformed
-        // TODO add your handling code here:
+        VueMedicament vueMedic = new VueMedicament();
+        vueMedic.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnMedicamentActionPerformed
 
     private void BtnPraticienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPraticienActionPerformed
-        // TODO add your handling code here:
+        VuePraticien vuePrat = new VuePraticien();
+        vuePrat.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnPraticienActionPerformed
 
     private void BtnVisiteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVisiteurActionPerformed
-        // TODO add your handling code here:
-
         VueVisiteur vueVisiteur = new VueVisiteur();
         vueVisiteur.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
 
     }//GEN-LAST:event_BtnVisiteurActionPerformed
+
+    private void formAncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_formAncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formAncestorMoved
 
     /**
      * @param args the command line arguments

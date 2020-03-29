@@ -1,19 +1,20 @@
 package LesClasses;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Offrir
  */
 public class Offrir {
     private ArrayList<RapportVisite> lesRapport;
-    private ArrayList<Medicament> lesMedoc;
-    private int offQte;
+    private HashMap<Medicament, Integer> lesMedoc;
+    private String visMatricule;
 
-    public Offrir(ArrayList<RapportVisite> rapports, ArrayList<Medicament> medicaments, int qte) {
+    public Offrir(ArrayList<RapportVisite> rapports, HashMap<Medicament, Integer> medicaments, String matricule) {
         lesRapport = rapports;
         lesMedoc = medicaments;
-        offQte = qte;
+        visMatricule = matricule;
     }
 
     public ArrayList<RapportVisite> getLesRapport() {
@@ -24,19 +25,19 @@ public class Offrir {
         this.lesRapport = lesRapport;
     }
 
-    public ArrayList<Medicament> getLesMedoc() {
+    public HashMap<Medicament, Integer> getLesMedoc() {
         return lesMedoc;
     }
 
-    public void setLesMedoc(ArrayList<Medicament> lesMedoc) {
+    public void setLesMedoc(HashMap<Medicament, Integer> lesMedoc) {
         this.lesMedoc = lesMedoc;
     }
 
-    public int getOffQte() {
-        return offQte;
+    public String getVisMatricule() {
+        return visMatricule;
     }
 
-    public void setOffQte(int offQte) {
-        this.offQte = offQte;
+    public void setVisMatricule(String visMatricule) {
+        this.visMatricule = visMatricule;
     }
 }

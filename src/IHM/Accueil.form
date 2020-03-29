@@ -9,6 +9,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="ancestorMoved" listener="java.awt.event.HierarchyBoundsListener" parameters="java.awt.event.HierarchyEvent" handler="formAncestorMoved"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -28,11 +31,9 @@
               <EmptySpace pref="157" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="BtnMedicament" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="BtnCompteRendu" max="32767" attributes="0"/>
-                      <Component id="BtnVisiteur" max="32767" attributes="0"/>
-                      <Component id="BtnPraticien" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="BtnCompteRendu" max="32767" attributes="0"/>
+                  <Component id="BtnVisiteur" max="32767" attributes="0"/>
+                  <Component id="BtnPraticien" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
           </Group>

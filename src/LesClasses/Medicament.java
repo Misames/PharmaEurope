@@ -2,6 +2,7 @@ package LesClasses;
 
 /**
  * Medicament
+ * @author François
  */
 public class Medicament {
 
