@@ -1,9 +1,11 @@
 package IHM;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import DAO.PraticienDAO;
-import LesClasses.Praticien;
+import DAO.LaboDAO;
+import DAO.VisiteurDAO;
+import LesClasses.Labo;
 import LesClasses.Visiteur;
 
 /**
@@ -12,18 +14,30 @@ import LesClasses.Visiteur;
  */
 public class VueVisiteur extends javax.swing.JFrame {
 
-    private Praticien unPrat;
+    private Visiteur unVis;
+    private ArrayList<Visiteur> desVis;
 
     /**
      * Creates new form Visiteur
      */
     public VueVisiteur() {
+        initComponents();
+
         try {
-            unPrat = new PraticienDAO().getFirstPra();
+            unVis = new VisiteurDAO().getFirstVis();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            LstLabo.removeAllItems();
+            for (Labo unLab : new LaboDAO().getLesLabo()) {
+                LstLabo.addItem(unLab.getLabNom());
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        initComponents();
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -56,6 +70,8 @@ public class VueVisiteur extends javax.swing.JFrame {
         BtnAjout = new javax.swing.JButton();
         BtnEnregistre = new javax.swing.JButton();
         BtnSuppr = new javax.swing.JButton();
+
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Visiteurs");
@@ -225,6 +241,7 @@ public class VueVisiteur extends javax.swing.JFrame {
         );
 
         pack();
+        
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOkActionPerformed
@@ -243,11 +260,6 @@ public class VueVisiteur extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -264,7 +276,6 @@ public class VueVisiteur extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Visiteur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
