@@ -300,7 +300,7 @@ public class VueVisiteur extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnOkActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnOkActionPerformed
-        //BtnEnregistre.setEnabled(true);
+        BtnEnregistre.setEnabled(true);
         String name = (String) LstVis.getSelectedItem();
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Selectionner un visiteur");

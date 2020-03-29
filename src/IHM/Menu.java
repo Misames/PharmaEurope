@@ -31,17 +31,18 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        try {
-            connexion = Connect.getConnexion();
-        } catch (SQLException e1) {
-            System.out.println(e1.getMessage());
-        }
-
         Valider = new javax.swing.JButton();
         ChampIdentifiant = new javax.swing.JTextField();
         LabelIdentifient = new javax.swing.JLabel();
         LabelMdp = new javax.swing.JLabel();
         ChampMdp = new javax.swing.JTextField();
+
+        try {
+            new Connect();
+            connexion = Connect.getConnexion();
+        } catch (SQLException e1) {
+            System.out.println(e1.getMessage());
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu  - PharmaEurope");
@@ -57,8 +58,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        LabelIdentifient.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelIdentifient.setText("Identifiant");
 
+        LabelMdp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelMdp.setText("Code secret");
 
         ChampMdp.addActionListener(new java.awt.event.ActionListener() {
@@ -72,14 +75,21 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Valider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ChampIdentifiant)
-                    .addComponent(LabelIdentifient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LabelMdp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ChampMdp))
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ChampMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(LabelIdentifient, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LabelMdp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(ChampIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,14 +97,14 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(LabelIdentifient)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ChampIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addComponent(ChampIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelMdp)
-                .addGap(38, 38, 38)
-                .addComponent(ChampMdp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
+                .addComponent(ChampMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(Valider)
-                .addGap(53, 53, 53))
+                .addGap(83, 83, 83))
         );
 
         pack();
@@ -111,7 +121,7 @@ public class Menu extends javax.swing.JFrame {
         // recup data des form
         String mdp = ChampMdp.getText();
         String id = ChampIdentifiant.getText();
-        System.out.println("log : Mdp : " + mdp.toString() + " / id :" + id);
+        System.out.println("log : Mdp : " + mdp + " / id :" + id);
 
         try {
             // tester les identifiants
@@ -124,8 +134,9 @@ public class Menu extends javax.swing.JFrame {
                 accueil.setVisible(true);
                 this.dispose();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Saisir un le bon mot de passe");
+            System.out.println(e.getMessage());
         }
 
         System.out.println("log : fin clic");
