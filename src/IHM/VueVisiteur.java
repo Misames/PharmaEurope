@@ -1,9 +1,6 @@
 package IHM;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import DAO.LaboDAO;
@@ -20,6 +17,7 @@ import LesClasses.Visiteur;
 public class VueVisiteur extends javax.swing.JFrame {
 
     private Visiteur unVis;
+    private VisiteurDAO visiteurDAO;
 
     /**
      * Creates new form Visiteur
@@ -34,21 +32,19 @@ public class VueVisiteur extends javax.swing.JFrame {
         LstSecteur.addItem("");
         LstVis.addItem("");
 
-        try {
+        LstLabo.setEnabled(false);
+        LstSecteur.setEnabled(false);
+        BtnEnregistre.setEnabled(false);
+        BtnSuppr.setEnabled(false);
+        BtnAjout.setEnabled(false);
 
+
+        try {
+            visiteurDAO = new VisiteurDAO();
             int i = 0;
-            for (Visiteur unVisiteur : new VisiteurDAO().getLesVisiteurs()) {
+            for (Visiteur unVisiteur : visiteurDAO.getLesVisiteurs()) {
                 LstVis.insertItemAt(unVisiteur.getVisNom() + " " + unVisiteur.getVisPrenom(), ++i);
             }
-
-            for (Labo unLab : new LaboDAO().getLesLabo()) {
-                LstLabo.addItem(unLab.getLabNom());
-            }
-
-            for (Secteur unSecteur : new SecteurDAO().getLesSecteur()) {
-                LstSecteur.addItem(unSecteur.getSecLibelle());
-            }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -92,7 +88,12 @@ public class VueVisiteur extends javax.swing.JFrame {
         BtnOk.setText("OK");
         BtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnOkActionPerformed(evt);
+                try {
+                    BtnOkActionPerformed(evt);
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -144,6 +145,16 @@ public class VueVisiteur extends javax.swing.JFrame {
         });
 
         BtnEnregistre.setText("Enregistrer");
+        BtnEnregistre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    BtnEnregistreActionPerformed(evt);
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
 
         BtnSuppr.setText("Supprimer");
         BtnSuppr.addActionListener(new java.awt.event.ActionListener() {
@@ -169,9 +180,6 @@ public class VueVisiteur extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(Titre, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblPrenom)
@@ -182,18 +190,20 @@ public class VueVisiteur extends javax.swing.JFrame {
                             .addComponent(LblVille))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(LstSecteur, 0, 127, Short.MAX_VALUE)
+                                .addComponent(LstLabo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(LstSecteur, 0, 127, Short.MAX_VALUE)
-                                    .addComponent(LstLabo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(46, 46, 46))))
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(Titre, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(225, 225, 225)
                         .addComponent(BtnEnregistre)
@@ -201,7 +211,7 @@ public class VueVisiteur extends javax.swing.JFrame {
                         .addComponent(BtnAjout)
                         .addGap(28, 28, 28)
                         .addComponent(BtnSuppr)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,10 +244,10 @@ public class VueVisiteur extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(LblVille)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LblSecteur)
@@ -254,13 +264,13 @@ public class VueVisiteur extends javax.swing.JFrame {
                             .addComponent(BtnEnregistre)
                             .addComponent(BtnAjout)
                             .addComponent(BtnSuppr))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnOkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BtnOkActionPerformed
+    private void BtnOkActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnOkActionPerformed
         // recup le visiteur == LstVis.getSelectedItem();
         String name = (String) LstVis.getSelectedItem();
         if (name.isEmpty()) {
@@ -268,7 +278,7 @@ public class VueVisiteur extends javax.swing.JFrame {
         } else {
             String[] fullName = name.split(" ");
             try {
-                unVis = new VisiteurDAO().getLevis(fullName[0], fullName[1]);
+                unVis = new VisiteurDAO().getLeVis(fullName[0], fullName[1]);
                 if (unVis == null)
                     JOptionPane.showMessageDialog(this, "Personne inconnue");
             } catch (SQLException e) {
@@ -278,9 +288,28 @@ public class VueVisiteur extends javax.swing.JFrame {
             TxtPrenom.setText(unVis.getVisPrenom());
             TxtAdresse.setText(unVis.getVisAdresse());
             TxtCp.setText(unVis.getVisCP());
+            TxtVille.setText(unVis.getVisVille());
+
+            LstLabo.setEnabled(true);
+            LstSecteur.setEnabled(true);
+            LstLabo.removeAllItems();
+            LstSecteur.removeAllItems();
+
+            for (Secteur unSecteur : new SecteurDAO().getLesSecteur()) {
+                LstSecteur.addItem(unSecteur.getSecLibelle());
+                if(unSecteur.getSecCode().equals(unVis.getVisSecteur().getSecCode())){
+                    LstSecteur.setSelectedItem(unVis.getVisSecteur().getSecLibelle());
+                }
+            }
+
+            for (Labo unLab : new LaboDAO().getLesLabo()) {;
+                    LstLabo.addItem(unLab.getLabNom());
+                    if(unLab.getLabCode().equals(unVis.getVisLabo().getLabCode())) {
+                        LstLabo.setSelectedItem(unLab.getLabNom());
+                    }
+            }
         }
-        // afficher le visiteur selectionner sauf si item == ""
-    }//GEN-LAST:event_BtnOkActionPerformed
+    }                                     
 
     private void BtnAjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAjoutActionPerformed
         // TODO add your handling code here:
@@ -292,7 +321,14 @@ public class VueVisiteur extends javax.swing.JFrame {
 
     private void LstVisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LstVisActionPerformed
         // do something xD
+        BtnEnregistre.setEnabled(true);
     }//GEN-LAST:event_LstVisActionPerformed
+
+    private void BtnEnregistreActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnEnregistreActionPerformed
+        // save visiteur
+        int lol = visiteurDAO.setVisiteur(unVis.getVisMatricule() ,TxtNom.getText(), TxtPrenom.getText(), TxtAdresse.getText(), TxtVille.getText(), TxtCp.getText(), (String) LstLabo.getSelectedItem(),(String) LstSecteur.getSelectedItem());
+        System.out.println(lol);
+    }
 
     /**
      * @param args the command line arguments

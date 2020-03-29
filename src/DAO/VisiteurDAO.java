@@ -58,7 +58,7 @@ public class VisiteurDAO {
         return res;
     }
 
-    public Visiteur getLevis(String nom, String prenom) throws SQLException {
+    public Visiteur getLeVis(String nom, String prenom) throws SQLException {
         Visiteur res = null;
         Labo unLab = null;
         Secteur unSecteur = null;
@@ -91,4 +91,21 @@ public class VisiteurDAO {
         return res;
     }
 
+    public int setVisiteur(String matricule, String nom, String prenom, String adresse, String ville, String cp,
+            String labo, String secteur) throws SQLException {
+
+        if (labo.equals("Swiss"))
+            labo = "SW";
+        else if (labo.equals("Bichat"))
+            labo = "BC";
+        else
+            labo = "GY";
+
+        String sql = "UPDATE visiteur INNER JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE SET VIS_NOM = '" + nom
+                + "', VIS_PRENOM = '" + prenom + "', VIS_ADRESSE = '" + adresse + "', VIS_VILLE = '" + ville
+                + "', VIS_CP = '" + cp + "', SEC_CODE = '" + secteur.charAt(0) + "', visiteur.LAB_CODE = '" + labo
+                + "' WHERE VIS_MATRICULE = '" + matricule + "'";
+        stmt = connexion.createStatement();
+        return stmt.executeUpdate(sql);
+    }
 }

@@ -122,7 +122,7 @@ public class Menu extends javax.swing.JFrame {
                 System.out.println("log : Menu principale");
                 Accueil accueil = new Accueil();
                 accueil.setVisible(true);
-                this.setVisible(false);
+                this.dispose();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Saisir un le bon mot de passe");
