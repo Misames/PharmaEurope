@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import LesClasses.Labo;
 import LesClasses.Secteur;
@@ -23,16 +24,16 @@ public class VisiteurDAO {
         }
     }
 
-    public Visiteur getFirstVis() throws SQLException {
-        Visiteur res = null;
+    public ArrayList<Visiteur> getLesVisiteurs() throws SQLException {
+        ArrayList<Visiteur> res = new ArrayList<Visiteur>();
         Labo unLab = null;
         Secteur unSecteur = null;
 
-        String sql = "SELECT * FROM visiteur LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE";
+        String sql = "SELECT * FROM visiteur LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE ORDER BY VIS_NOM";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
 
-        if (rs.next()) {
+        while(rs.next()) {
             String mat = rs.getString("VIS_MATRICULE");
             String nom = rs.getString("VIS_NOM");
             String prenom = rs.getString("VIS_PRENOM");
@@ -51,8 +52,42 @@ public class VisiteurDAO {
 
             unLab = new Labo(labCode, nomLabo, chef);
             unSecteur = new Secteur(secCode, secLibelle);
-            res = new Visiteur(mat, nom, prenom, adresse, cp, ville, dateEnbauche, unSecteur, unLab);
+            Visiteur vis = new Visiteur(mat, nom, prenom, adresse, cp, ville, dateEnbauche, unSecteur, unLab);
+            res.add(vis);
         }
+        return res;
+    }
+
+    public Visiteur getLevis(String nom, String prenom) throws SQLException {
+        Visiteur res = null;
+        Labo unLab = null;
+        Secteur unSecteur = null;
+
+        String sql = "SELECT * FROM visiteur LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE WHERE VIS_NOM = '" + nom + "' AND VIS_PRENOM = '" + prenom + "'";
+        stmt = connexion.createStatement();
+        rs = stmt.executeQuery(sql);
+
+        if (rs.next()) {
+            String mat = rs.getString("VIS_MATRICULE");
+            String sonNom = rs.getString("VIS_NOM");
+            String sonPrenom = rs.getString("VIS_PRENOM");
+            String adresse = rs.getString("VIS_ADRESSE");
+            String cp = rs.getString("VIS_CP");
+            String ville = rs.getString("VIS_VILLE");
+            Date dateEnbauche = rs.getDate("VIS_DATEEMBAUCHE");
+
+            String labCode = rs.getString("LAB_CODE");
+            String nomLabo = rs.getString("LAB_NOM");
+            String chef = rs.getString("LAB_CHEFVENTE");
+
+            String secCode = rs.getString("SEC_CODE");
+            String secLibelle = rs.getString("SEC_LIBELLE");
+
+            unLab = new Labo(labCode, nomLabo, chef);
+            unSecteur = new Secteur(secCode, secLibelle);
+            res = new Visiteur(mat, sonNom, sonPrenom, adresse, cp, ville, dateEnbauche, unSecteur, unLab);
+        }
+
         return res;
     }
 

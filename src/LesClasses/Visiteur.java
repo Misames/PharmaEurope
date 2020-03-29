@@ -31,7 +31,6 @@ public class Visiteur {
             visCP = cp;
             visVille = ville;
             visDateEnBauche = enbauche;
-            System.out.println("log : nouveau visiteur");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

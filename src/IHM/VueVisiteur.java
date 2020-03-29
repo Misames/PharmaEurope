@@ -3,9 +3,14 @@ package IHM;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 import DAO.LaboDAO;
+import DAO.SecteurDAO;
 import DAO.VisiteurDAO;
 import LesClasses.Labo;
+import LesClasses.Secteur;
 import LesClasses.Visiteur;
 
 /**
@@ -15,29 +20,38 @@ import LesClasses.Visiteur;
 public class VueVisiteur extends javax.swing.JFrame {
 
     private Visiteur unVis;
-    private ArrayList<Visiteur> desVis;
 
     /**
      * Creates new form Visiteur
      */
     public VueVisiteur() {
         initComponents();
+        LstLabo.removeAllItems();
+        LstSecteur.removeAllItems();
+        LstVis.removeAllItems();
+
+        LstLabo.addItem("");
+        LstSecteur.addItem("");
+        LstVis.addItem("");
 
         try {
-            unVis = new VisiteurDAO().getFirstVis();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
 
-        try {
-            LstLabo.removeAllItems();
+            int i = 0;
+            for (Visiteur unVisiteur : new VisiteurDAO().getLesVisiteurs()) {
+                LstVis.insertItemAt(unVisiteur.getVisNom() + " " + unVisiteur.getVisPrenom(), ++i);
+            }
+
             for (Labo unLab : new LaboDAO().getLesLabo()) {
                 LstLabo.addItem(unLab.getLabNom());
             }
+
+            for (Secteur unSecteur : new SecteurDAO().getLesSecteur()) {
+                LstSecteur.addItem(unSecteur.getSecLibelle());
+            }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -70,8 +84,6 @@ public class VueVisiteur extends javax.swing.JFrame {
         BtnAjout = new javax.swing.JButton();
         BtnEnregistre = new javax.swing.JButton();
         BtnSuppr = new javax.swing.JButton();
-
-
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Visiteurs");
@@ -118,6 +130,11 @@ public class VueVisiteur extends javax.swing.JFrame {
         LstLabo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         LstVis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        LstVis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LstVisActionPerformed(evt);
+            }
+        });
 
         BtnAjout.setText("Ajouter");
         BtnAjout.addActionListener(new java.awt.event.ActionListener() {
@@ -241,11 +258,28 @@ public class VueVisiteur extends javax.swing.JFrame {
         );
 
         pack();
-        
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOkActionPerformed
-        // TODO add your handling code here:
+    private void BtnOkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BtnOkActionPerformed
+        // recup le visiteur == LstVis.getSelectedItem();
+        String name = (String) LstVis.getSelectedItem();
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selectionner un visiteur");
+        } else {
+            String[] fullName = name.split(" ");
+            try {
+                unVis = new VisiteurDAO().getLevis(fullName[0], fullName[1]);
+                if (unVis == null)
+                    JOptionPane.showMessageDialog(this, "Personne inconnue");
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            TxtNom.setText(unVis.getVisNom());
+            TxtPrenom.setText(unVis.getVisPrenom());
+            TxtAdresse.setText(unVis.getVisAdresse());
+            TxtCp.setText(unVis.getVisCP());
+        }
+        // afficher le visiteur selectionner sauf si item == ""
     }//GEN-LAST:event_BtnOkActionPerformed
 
     private void BtnAjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAjoutActionPerformed
@@ -255,6 +289,10 @@ public class VueVisiteur extends javax.swing.JFrame {
     private void BtnSupprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSupprActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnSupprActionPerformed
+
+    private void LstVisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LstVisActionPerformed
+        // do something xD
+    }//GEN-LAST:event_LstVisActionPerformed
 
     /**
      * @param args the command line arguments
