@@ -16,6 +16,10 @@ import LesClasses.Visiteur;
  */
 public class VueVisiteur extends javax.swing.JFrame {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3275827967950383805L;
     private Visiteur unVis;
     private VisiteurDAO visiteurDAO;
 
@@ -37,7 +41,6 @@ public class VueVisiteur extends javax.swing.JFrame {
         BtnEnregistre.setEnabled(false);
         BtnSuppr.setEnabled(false);
         BtnAjout.setEnabled(false);
-
 
         try {
             visiteurDAO = new VisiteurDAO();
@@ -80,10 +83,19 @@ public class VueVisiteur extends javax.swing.JFrame {
         BtnAjout = new javax.swing.JButton();
         BtnEnregistre = new javax.swing.JButton();
         BtnSuppr = new javax.swing.JButton();
+        javax.swing.JToggleButton Btnretour = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Visiteurs");
         setAlwaysOnTop(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         BtnOk.setText("OK");
         BtnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +171,19 @@ public class VueVisiteur extends javax.swing.JFrame {
         BtnSuppr.setText("Supprimer");
         BtnSuppr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSupprActionPerformed(evt);
+                try {
+                    BtnSupprActionPerformed(evt);
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Btnretour.setText("Retour");
+        Btnretour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnretourActionPerformed(evt);
             }
         });
 
@@ -202,9 +226,6 @@ public class VueVisiteur extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(Titre, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(225, 225, 225)
                         .addComponent(BtnEnregistre)
                         .addGap(18, 18, 18)
@@ -212,14 +233,22 @@ public class VueVisiteur extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(BtnSuppr)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(198, 198, 198)
+                .addComponent(Titre, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Btnretour)
+                .addGap(54, 54, 54))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(Titre)
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Titre)
+                            .addComponent(Btnretour))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -315,14 +344,32 @@ public class VueVisiteur extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnAjoutActionPerformed
 
-    private void BtnSupprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSupprActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnSupprActionPerformed
+    private void BtnSupprActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnSupprActionPerformed
+        if (JOptionPane.showConfirmDialog(this, "Sûr de vouloir supprimer " + unVis.getVisNom() + " " + unVis.getVisPrenom()) == 0) {
+            int nbDelete = visiteurDAO.deleteVisiteur(unVis.getVisMatricule());
+            System.out.println(nbDelete);
+        }
+    }                                        
 
     private void LstVisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LstVisActionPerformed
         // do something xD
         BtnEnregistre.setEnabled(true);
+        BtnSuppr.setEnabled(true);
     }//GEN-LAST:event_LstVisActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        System.out.println("fermer la window");
+    }//GEN-LAST:event_formWindowClosing
+
+    private void BtnretourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnretourActionPerformed
+        Accueil accueil = new Accueil();
+        accueil.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnretourActionPerformed
 
     private void BtnEnregistreActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnEnregistreActionPerformed
         // save visiteur

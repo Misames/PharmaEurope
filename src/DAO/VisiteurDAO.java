@@ -58,6 +58,12 @@ public class VisiteurDAO {
         return res;
     }
 
+    public int deleteVisiteur(String matricule) throws SQLException {
+        String sql = "DELETE FROM visiteur WHERE VIS_MATRICULE = '" + matricule + "'";
+        stmt = connexion.createStatement();
+        return stmt.executeUpdate(sql);
+    }
+
     public Visiteur getLeVis(String nom, String prenom) throws SQLException {
         Visiteur res = null;
         Labo unLab = null;
