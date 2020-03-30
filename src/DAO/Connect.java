@@ -36,8 +36,8 @@ public class Connect {
     }
 
     public static boolean connexion(String id, String mdp) throws SQLException {
-        String sql = "SELECT * FROM pharmaeurope.visiteur WHERE VIS_NOM = '" + id + "' AND VIS_DATEEMBAUCHE = '" + mdp
-                + "'";
+        String sql = "SELECT * FROM pharmaeurope.visiteur " +
+                     "WHERE VIS_NOM = '" + id + "' AND VIS_DATEEMBAUCHE = '" + mdp + "'";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         return rs.next();
@@ -46,7 +46,7 @@ public class Connect {
     public static Connection getConnexion() throws SQLException {
         if (connexion == null) {
             connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-            System.out.println("log : MySQL connecté from getter");
+            System.out.println("log : MySQL connecté");
         }
         return connexion;
     }

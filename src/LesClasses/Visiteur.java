@@ -19,7 +19,7 @@ public class Visiteur {
     private String visCP;
     private String visVille;
 
-    public Visiteur(String matricule, String nom, String prenom, String adresse, String cp, String ville, Date enbauche,
+    public Visiteur(String matricule, String nom, String prenom, String adresse, String cp, String ville, Date dateEnbauche,
             Secteur secteur, Labo lab) {
         try {
             visSecteur = secteur;
@@ -30,7 +30,7 @@ public class Visiteur {
             visAdresse = adresse;
             visCP = cp;
             visVille = ville;
-            visDateEnBauche = enbauche;
+            visDateEnBauche = dateEnbauche;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

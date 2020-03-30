@@ -9,12 +9,12 @@ import java.util.HashMap;
 public class Offrir {
     private ArrayList<RapportVisite> lesRapport;
     private HashMap<Medicament, Integer> lesMedoc;
-    private String visMatricule;
+    private Visiteur offrirVisiteur;
 
-    public Offrir(ArrayList<RapportVisite> rapports, HashMap<Medicament, Integer> medicaments, String matricule) {
+    public Offrir(ArrayList<RapportVisite> rapports, HashMap<Medicament, Integer> medicaments, Visiteur leVisiteur) {
         lesRapport = rapports;
         lesMedoc = medicaments;
-        visMatricule = matricule;
+        offrirVisiteur= leVisiteur;
     }
 
     public ArrayList<RapportVisite> getLesRapport() {
@@ -33,11 +33,11 @@ public class Offrir {
         this.lesMedoc = lesMedoc;
     }
 
-    public String getVisMatricule() {
-        return visMatricule;
+    public Visiteur getOffrirVisiteur() {
+        return offrirVisiteur;
     }
 
-    public void setVisMatricule(String visMatricule) {
-        this.visMatricule = visMatricule;
+    public void setOffrirVisiteur(Visiteur offrirVisiteur) {
+        this.offrirVisiteur = offrirVisiteur;
     }
 }

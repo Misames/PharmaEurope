@@ -10,8 +10,9 @@ public class Formuler {
     private ArrayList<Medicament> lesMedoc;
     private ArrayList<Presentation> lesPresentation;
 
-    public Formuler() {
-
+    public Formuler(ArrayList<Medicament> medoc, ArrayList<Presentation> presentation) {
+        lesMedoc = medoc;
+        lesPresentation = presentation;
     }
 
     public ArrayList<Medicament> getLesMedoc() {

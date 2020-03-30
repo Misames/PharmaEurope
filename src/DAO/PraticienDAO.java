@@ -1,7 +1,11 @@
 package DAO;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+
 import LesClasses.Praticien;
 import LesClasses.TypePracticien;
 
@@ -24,7 +28,8 @@ public class PraticienDAO {
 
     public ArrayList<Praticien> getLesPraticien() throws SQLException {
         ArrayList<Praticien> res = new ArrayList<Praticien>();
-        String sql = "SELECT * FROM praticien INNER JOIN type_praticien ON praticien.TYP_CODE = type_praticien.TYP_CODE";
+        String sql = "SELECT * FROM praticien " +
+                     "INNER JOIN type_praticien ON praticien.TYP_CODE = type_praticien.TYP_CODE";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         while (rs.next()) {
@@ -46,7 +51,9 @@ public class PraticienDAO {
 
     public Praticien getLePra(String nom, String prenom) throws SQLException {
         Praticien res = null;
-        String sql = "SELECT * FROM praticien INNER JOIN type_praticien ON praticien.TYP_CODE = type_praticien.TYP_CODE WHERE PRA_NOM = '" + nom + "' AND PRA_PRENOM = '" + prenom + "'";
+        String sql = "SELECT * FROM praticien " +
+                     "INNER JOIN type_praticien ON praticien.TYP_CODE = type_praticien.TYP_CODE " +
+                     "WHERE PRA_NOM = '" + nom + "' AND PRA_PRENOM = '" + prenom + "'";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         if (rs.next()) {

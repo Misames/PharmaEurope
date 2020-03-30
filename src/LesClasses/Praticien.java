@@ -17,20 +17,14 @@ public class Praticien {
 
     public Praticien(String num, String nom, String prenom, String adresse, String cp, String ville, float coef,
             TypePracticien type) {
-
-        try {
-            praNum = num;
-            praNom = nom;
-            praPrenom = prenom;
-            praAdresse = adresse;
-            praCP = cp;
-            praVille = ville;
-            praCoefnotoriete = coef;
-            typePracticien = type;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
+        praNum = num;
+        praNom = nom;
+        praPrenom = prenom;
+        praAdresse = adresse;
+        praCP = cp;
+        praVille = ville;
+        praCoefnotoriete = coef;
+        typePracticien = type;
     }
 
     public String getNom() {

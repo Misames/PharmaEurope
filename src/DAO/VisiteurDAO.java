@@ -29,7 +29,10 @@ public class VisiteurDAO {
         Labo unLab = null;
         Secteur unSecteur = null;
 
-        String sql = "SELECT * FROM visiteur LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE ORDER BY VIS_NOM";
+        String sql = "SELECT * FROM visiteur " +
+                     "LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE " +
+                     "LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE " +
+                     "ORDER BY VIS_NOM";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
 
@@ -69,7 +72,10 @@ public class VisiteurDAO {
         Labo unLab = null;
         Secteur unSecteur = null;
 
-        String sql = "SELECT * FROM visiteur LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE WHERE VIS_NOM = '" + nom + "' AND VIS_PRENOM = '" + prenom + "'";
+        String sql = "SELECT * FROM visiteur " +
+                     "LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE " +
+                     "LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE " +
+                     "WHERE VIS_NOM = '" + nom + "' AND VIS_PRENOM = '" + prenom + "'";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
 
