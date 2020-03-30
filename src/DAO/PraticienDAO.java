@@ -3,6 +3,7 @@ package DAO;
 import java.sql.*;
 import java.util.ArrayList;
 import LesClasses.Praticien;
+import LesClasses.TypePracticien;
 
 /**
  * PraticienDAO
@@ -23,7 +24,7 @@ public class PraticienDAO {
 
     public ArrayList<Praticien> getLesPraticien() throws SQLException {
         ArrayList<Praticien> res = new ArrayList<Praticien>();
-        String sql = "SELECT * FROM praticien";
+        String sql = "SELECT * FROM praticien INNER JOIN type_praticien ON praticien.TYP_CODE = type_praticien.TYP_CODE";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         while (rs.next()) {
@@ -34,35 +35,34 @@ public class PraticienDAO {
             String cp = rs.getString("PRA_CP");
             String ville = rs.getString("PRA_VILLE");
             float coef = rs.getFloat("PRA_COEFNOTORIETE");
-            String type = rs.getString("TYP_CODE");
-            res.add(new Praticien(num, nom, prenom, adresse, cp, ville, coef, type));
+            String typeCode = rs.getString("TYP_CODE");
+            String typeLibellle = rs.getString("TYP_LIBELLE");
+            String typeLieu = rs.getString("TYP_LIEU");
+            TypePracticien typePracticien = new TypePracticien(typeCode, typeLibellle, typeLieu);
+            res.add(new Praticien(num, nom, prenom, adresse, cp, ville, coef, typePracticien));
         }
         return res;
     }
 
-    /**
-     * Retourne le premier Praticien de la liste ou null si la table est vide
-     * 
-     * @return Praticien | null
-     * @throws SQLException
-     */
-    public Praticien getFirstPra() throws SQLException {
+    public Praticien getLePra(String nom, String prenom) throws SQLException {
         Praticien res = null;
-        String sql = "SELECT * FROM praticien";
+        String sql = "SELECT * FROM praticien INNER JOIN type_praticien ON praticien.TYP_CODE = type_praticien.TYP_CODE WHERE PRA_NOM = '" + nom + "' AND PRA_PRENOM = '" + prenom + "'";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         if (rs.next()) {
             String num = rs.getString("PRA_NUM");
-            String nom = rs.getString("PRA_NOM");
-            String prenom = rs.getString("PRA_PRENOM");
+            String sonNom = rs.getString("PRA_NOM");
+            String sonPrenom = rs.getString("PRA_PRENOM");
             String adresse = rs.getString("PRA_ADRESSE");
             String cp = rs.getString("PRA_CP");
             String ville = rs.getString("PRA_VILLE");
             float coef = rs.getFloat("PRA_COEFNOTORIETE");
-            String type = rs.getString("TYP_CODE");
-            res = new Praticien(num, nom, prenom, adresse, cp, ville, coef, type);
+            String typeCode = rs.getString("TYP_CODE");
+            String typeLibellle = rs.getString("TYP_LIBELLE");
+            String typeLieu = rs.getString("TYP_LIEU");
+            TypePracticien typePracticien = new TypePracticien(typeCode, typeLibellle, typeLieu);
+            res = new Praticien(num, sonNom, sonPrenom, adresse, cp, ville, coef, typePracticien);
         }
         return res;
     }
-
 }

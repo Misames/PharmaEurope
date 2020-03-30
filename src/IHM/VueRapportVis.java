@@ -7,7 +7,7 @@ package IHM;
 
 /**
  *
- * @author WiZaR
+ * @author François Bouscaillou
  */
 public class VueRapportVis extends javax.swing.JFrame {
 
@@ -16,6 +16,7 @@ public class VueRapportVis extends javax.swing.JFrame {
      */
     public VueRapportVis() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -53,6 +54,7 @@ public class VueRapportVis extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Rapport de visite");
 
         BtnRetour.setText("Retour");
         BtnRetour.addActionListener(new java.awt.event.ActionListener() {

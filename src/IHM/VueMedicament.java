@@ -7,7 +7,7 @@ package IHM;
 
 /**
  *
- * @author WiZaR
+ * @author François Bouscaillou
  */
 public class VueMedicament extends javax.swing.JFrame {
 
@@ -16,6 +16,7 @@ public class VueMedicament extends javax.swing.JFrame {
      */
     public VueMedicament() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -54,6 +55,7 @@ public class VueMedicament extends javax.swing.JFrame {
         LstFam = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Médicament");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Médicaments");

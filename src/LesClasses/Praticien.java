@@ -13,10 +13,10 @@ public class Praticien {
     private String praCP;
     private String praVille;
     private float praCoefnotoriete;
-    private String typeCode;
+    private TypePracticien typePracticien;
 
     public Praticien(String num, String nom, String prenom, String adresse, String cp, String ville, float coef,
-            String type) {
+            TypePracticien type) {
 
         try {
             praNum = num;
@@ -26,8 +26,7 @@ public class Praticien {
             praCP = cp;
             praVille = ville;
             praCoefnotoriete = coef;
-            typeCode = type;
-            System.out.println("Nouveau praticien !");
+            typePracticien = type;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -136,17 +135,11 @@ public class Praticien {
         this.praCoefnotoriete = praCoefnotoriete;
     }
 
-    /**
-     * @return the typeCode
-     */
-    public String getTypeCode() {
-        return typeCode;
+    public TypePracticien getTypePracticien() {
+        return typePracticien;
     }
 
-    /**
-     * @param typeCode the typeCode to set
-     */
-    public void setTypeCode(String typeCode) {
-        this.typeCode = typeCode;
+    public void setTypePracticien(TypePracticien typePracticien) {
+        this.typePracticien = typePracticien;
     }
 }

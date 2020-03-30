@@ -28,6 +28,7 @@ public class VueVisiteur extends javax.swing.JFrame {
      */
     public VueVisiteur() {
         initComponents();
+        setLocationRelativeTo(null);
         LstLabo.removeAllItems();
         LstSecteur.removeAllItems();
         LstVis.removeAllItems();
@@ -51,6 +52,7 @@ public class VueVisiteur extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -162,8 +164,7 @@ public class VueVisiteur extends javax.swing.JFrame {
                 try {
                     BtnEnregistreActionPerformed(evt);
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+
                 }
             }
         });
@@ -174,8 +175,7 @@ public class VueVisiteur extends javax.swing.JFrame {
                 try {
                     BtnSupprActionPerformed(evt);
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+
                 }
             }
         });
@@ -300,7 +300,6 @@ public class VueVisiteur extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnOkActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnOkActionPerformed
-        BtnEnregistre.setEnabled(true);
         String name = (String) LstVis.getSelectedItem();
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Selectionner un visiteur");
@@ -337,8 +336,9 @@ public class VueVisiteur extends javax.swing.JFrame {
                         LstLabo.setSelectedItem(unLab.getLabNom());
                     }
             }
+            BtnEnregistre.setEnabled(true);
         }
-    }                                     
+    }
 
     private void BtnAjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAjoutActionPerformed
         // TODO add your handling code here:

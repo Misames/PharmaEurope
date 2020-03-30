@@ -23,6 +23,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() throws ClassNotFoundException, SQLException {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated
