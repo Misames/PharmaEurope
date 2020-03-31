@@ -49,4 +49,10 @@ public class MedicamentDAO {
         return res;
     }
 
+    public int saveMedic() throws SQLException {
+        String sql = "UPDATE medicament " + "SET " + "WHERE = ";
+        stmt = connexion.createStatement();
+        return stmt.executeUpdate(sql);
+    }
+
 }

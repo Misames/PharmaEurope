@@ -83,4 +83,12 @@ public class Medicament {
         this.medPrixEchantillon = medPrixEchantillon;
     }
 
+    public Famille getFamille() {
+        return famille;
+    }
+
+    public void setFamille(Famille famille) {
+        this.famille = famille;
+    }
+
 }

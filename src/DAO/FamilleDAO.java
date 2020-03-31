@@ -25,10 +25,18 @@ public class FamilleDAO {
         }
     }
 
-    public Famille getFamilles() {
+    public ArrayList<Famille> getFamilles() throws SQLException {
         ArrayList<Famille> res = new ArrayList<Famille>();
         String sql = "SELECT * FROM famille";
-        return null;
+        stmt = connexion.createStatement();
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            String code = rs.getString("FAM_CODE");
+            String libelle = rs.getString("FAM_LIBELLE");
+            Famille fam = new Famille(code, libelle);
+            res.add(fam);
+        }
+        return res;
     }
 
 }

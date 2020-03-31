@@ -8,7 +8,9 @@ package IHM;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import DAO.FamilleDAO;
 import DAO.MedicamentDAO;
+import LesClasses.Famille;
 import LesClasses.Medicament;
 
 /**
@@ -19,6 +21,7 @@ public class VueMedicament extends javax.swing.JFrame {
 
     private MedicamentDAO MedicDAO;
     private ArrayList<Medicament> lesMedic;
+    private FamilleDAO FamilleDAO;
     private int num;
 
     /**
@@ -28,9 +31,17 @@ public class VueMedicament extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         MedicDAO = new MedicamentDAO();
+        FamilleDAO = new FamilleDAO();
         num = 0;
         try {
+            LstFam.removeAllItems();
             lesMedic = MedicDAO.getLesMedoc();
+            for (Famille uneFamille : FamilleDAO.getFamilles()) {
+                LstFam.addItem(uneFamille.getFamLibelle());
+                if (uneFamille.getFamCode().equals(lesMedic.get(num).getFamille().getFamCode())) {
+                    LstFam.setSelectedItem(uneFamille.getFamLibelle());;
+                }
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -40,9 +51,6 @@ public class VueMedicament extends javax.swing.JFrame {
             TxtEffet.setText(lesMedic.get(num).getMedEffets());
             TxtNameCom.setText(lesMedic.get(num).getMedNomCommercial());
             Txtprix.setText(Float.toString(lesMedic.get(num).getMedPrixEchantillon()));
-
-            
-
         }
     }
 
@@ -133,14 +141,24 @@ public class VueMedicament extends javax.swing.JFrame {
         btnPrec.setText("Précédent");
         btnPrec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrecActionPerformed(evt);
+                try {
+                    btnPrecActionPerformed(evt);
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
 
         BtnSuiv.setText("Suivant");
         BtnSuiv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSuivActionPerformed(evt);
+                try {
+                    BtnSuivActionPerformed(evt);
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -152,53 +170,57 @@ public class VueMedicament extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPrec))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(BtnSuiv)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BtnSave)
-                                .addGap(70, 70, 70))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(LstFam, javax.swing.GroupLayout.Alignment.LEADING, 0, 122, Short.MAX_VALUE)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(267, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(111, 111, 111)
                 .addComponent(BtnBack)
                 .addGap(51, 51, 51))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnPrec)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(BtnSuiv)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnSave)
+                                .addGap(67, 67, 67))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane2)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LstFam, javax.swing.GroupLayout.Alignment.LEADING, 0, 473, Short.MAX_VALUE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,13 +241,13 @@ public class VueMedicament extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(LstFam, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LstFam, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -266,22 +288,56 @@ public class VueMedicament extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnSaveActionPerformed
 
-    private void btnPrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrecActionPerformed
-       
-    }//GEN-LAST:event_btnPrecActionPerformed
+    private void btnPrecActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_btnPrecActionPerformed
+       if (--num < 0)
+        num = 0;
+       LstFam.removeAllItems();
+       lesMedic = MedicDAO.getLesMedoc();
+       for (Famille uneFamille : FamilleDAO.getFamilles()) {
+           LstFam.addItem(uneFamille.getFamLibelle());
+           if (uneFamille.getFamCode().equals(lesMedic.get(num).getFamille().getFamCode())) {
+               LstFam.setSelectedItem(uneFamille.getFamLibelle());
+               ;
+           }
+       }
+       TxtCode.setText(lesMedic.get(num).getMedDepotLegal());
+       TxtCompo.setText(lesMedic.get(num).getMedComposition());
+       TxtContreIndic.setText(lesMedic.get(num).getMedContreIndic());
+       TxtEffet.setText(lesMedic.get(num).getMedEffets());
+       TxtNameCom.setText(lesMedic.get(num).getMedNomCommercial());
+       Txtprix.setText(Float.toString(lesMedic.get(num).getMedPrixEchantillon()));
+   }
 
-    private void BtnSuivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSuivActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnSuivActionPerformed
+    private void BtnSuivActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnSuivActionPerformed
+        if (++num >= lesMedic.size())
+            num = lesMedic.size() - 1;
+        LstFam.removeAllItems();
+        lesMedic = MedicDAO.getLesMedoc();
+        for (Famille uneFamille : FamilleDAO.getFamilles()) {
+            LstFam.addItem(uneFamille.getFamLibelle());
+            if (uneFamille.getFamCode().equals(lesMedic.get(num).getFamille().getFamCode())) {
+                LstFam.setSelectedItem(uneFamille.getFamLibelle());
+            }
+        }
+        TxtCode.setText(lesMedic.get(num).getMedDepotLegal());
+        TxtCompo.setText(lesMedic.get(num).getMedComposition());
+        TxtContreIndic.setText(lesMedic.get(num).getMedContreIndic());
+        TxtEffet.setText(lesMedic.get(num).getMedEffets());
+        TxtNameCom.setText(lesMedic.get(num).getMedNomCommercial());
+        Txtprix.setText(Float.toString(lesMedic.get(num).getMedPrixEchantillon()));
+    }// GEN-LAST:event_BtnSuivActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -291,13 +347,17 @@ public class VueMedicament extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VueMedicament.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueMedicament.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VueMedicament.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueMedicament.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VueMedicament.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueMedicament.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VueMedicament.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueMedicament.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         }
         //</editor-fold>
 
