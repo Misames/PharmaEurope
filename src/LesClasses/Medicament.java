@@ -12,14 +12,27 @@ public class Medicament {
     private String medEffets;
     private String medContreIndic;
     private float medPrixEchantillon;
+    private Famille famille;
 
-    public Medicament(String depot, String nom, String compo, String effet, String contreIndic, float prix) {
+
+    /**
+     * 
+     * @param depot
+     * @param nom
+     * @param compo
+     * @param effet
+     * @param contreIndic
+     * @param prix
+     * @param fam
+     */
+    public Medicament(String depot, String nom, String compo, String effet, String contreIndic, float prix, Famille fam) {
         medDepotLegal = depot;
         medNomCommercial = nom;
         medComposition = compo;
         medEffets = effet;
         medContreIndic = contreIndic;
         medPrixEchantillon = prix;
+        famille = fam;
     }
 
     public String getMedDepotLegal() {

@@ -26,6 +26,11 @@ public class PraticienDAO {
         }
     }
 
+    /**
+     * 
+     * @return la liste complete des praticiens 
+     * @throws SQLException
+     */
     public ArrayList<Praticien> getLesPraticien() throws SQLException {
         ArrayList<Praticien> res = new ArrayList<Praticien>();
         String sql = "SELECT * FROM praticien " +
@@ -72,4 +77,14 @@ public class PraticienDAO {
         }
         return res;
     }
+
+
+    public int setPraticien(String num, String nom, String prenom, String adresse, String cp, String ville, String coef, String lieu) throws SQLException {
+        String sql = "UPDATE praticien SET PRA_NOM = '" + nom + "'" +
+                     "WHERE PRA_NUM = " + num + "'";
+        stmt = connexion.createStatement();
+        return stmt.executeUpdate(sql);
+    }
+
+
 }

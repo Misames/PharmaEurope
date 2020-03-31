@@ -139,9 +139,6 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Saisir un le bon mot de passe");
             System.out.println(e.getMessage());
         }
-
-        System.out.println("log : fin clic");
-
     }// GEN-LAST:event_ValiderActionPerformed
 
     /**

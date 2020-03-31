@@ -19,6 +19,18 @@ public class Visiteur {
     private String visCP;
     private String visVille;
 
+    /**
+     * 
+     * @param matricule
+     * @param nom
+     * @param prenom
+     * @param adresse
+     * @param cp
+     * @param ville
+     * @param dateEnbauche
+     * @param secteur
+     * @param lab
+     */
     public Visiteur(String matricule, String nom, String prenom, String adresse, String cp, String ville, Date dateEnbauche,
             Secteur secteur, Labo lab) {
         try {

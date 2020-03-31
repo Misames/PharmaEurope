@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import DAO.PraticienDAO;
+import DAO.TypePraticienDAO;
 import LesClasses.Praticien;
+import LesClasses.TypePracticien;
 
 /**
  *
@@ -16,7 +18,9 @@ public class VuePraticien extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
     private ArrayList<Praticien> lesPrat;
+    private ArrayList<TypePracticien> lesType;
     private PraticienDAO pratDAO;
+    private TypePraticienDAO TypeDAO;
     private Praticien unPraticien;
 
     /**
@@ -30,16 +34,12 @@ public class VuePraticien extends javax.swing.JFrame {
         btnAdd.setEnabled(false);
         Btndelete.setEnabled(false);
         BtnSave.setEnabled(false);
-        TxtNom.setEnabled(false);
-        TxtAdresse.setEnabled(false);
-        TxtCp.setEnabled(false);
-        TxtPrenom.setEnabled(false);
-        TxtVille.setEnabled(false);
         setLocationRelativeTo(null);
 
         try {
             pratDAO = new PraticienDAO();
             lesPrat = pratDAO.getLesPraticien();
+            TypeDAO = new TypePraticienDAO();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -65,7 +65,7 @@ public class VuePraticien extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         LstLieu = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        nbCoef = new javax.swing.JSpinner();
+        nbCoef = new javax.swing.JTextPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         TxtCp = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -115,11 +115,8 @@ public class VuePraticien extends javax.swing.JFrame {
 
         LstLieu.setModel(
                 new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        LstLieu.setNextFocusableComponent(BtnSave);
 
         jLabel9.setText("Type de lieu");
-
-        nbCoef.setNextFocusableComponent(LstLieu);
 
         jScrollPane1.setViewportView(TxtCp);
 
@@ -139,6 +136,11 @@ public class VuePraticien extends javax.swing.JFrame {
         });
 
         BtnSave.setText("Enregistrer");
+        BtnSave.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        BtnAddActionPerformed(evt);
+                    }
+        });
 
         Btndelete.setText("Supprimer");
 
@@ -301,25 +303,44 @@ public class VuePraticien extends javax.swing.JFrame {
         } else {
             String[] fullName = name.split(" ");
             try {
-                 unPraticien = pratDAO.getLePra(fullName[0], fullName[1]);
+                unPraticien = pratDAO.getLePra(fullName[0], fullName[1]);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } finally {
+                BtnSave.setEnabled(true);
+                nbCoef.setText(Float.toString(unPraticien.getPraCoefnotoriete()));
                 TxtNom.setText(unPraticien.getNom());
                 TxtPrenom.setText(unPraticien.getPraPrenom());
                 TxtAdresse.setText(unPraticien.getPraAdresse());
                 TxtCp.setText(unPraticien.getPraCP());
                 TxtVille.setText(unPraticien.getPraVille());
+                LstLieu.setEnabled(true);
+                LstLieu.removeAllItems();
+                try {
+                    lesType = TypeDAO.getlesType();
+                } catch (SQLException e) {
+                    System.out.println(e.getErrorCode());
+                } finally {
+                    for (TypePracticien unType : lesType) {
+                        LstLieu.addItem(unType.getTypLibelle());
+                        if (unType.getTypeCode().equals(unPraticien.getTypePracticien().getTypeCode())) {
+                            LstLieu.setSelectedItem(unType.getTypLibelle());
+                        }
+                    }
+                }
             }
-            
         }
-    }//GEN-LAST:event_BtnOkActionPerformed
+    }// GEN-LAST:event_BtnOkActionPerformed
 
-    private void BtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBackActionPerformed
+    private void BtnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BtnBackActionPerformed
         Accueil accueil = new Accueil();
         accueil.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_BtnBackActionPerformed
+    }// GEN-LAST:event_BtnBackActionPerformed
+
+    private void BtnAddActionPerformed(java.awt.event.ActionEvent evt) {
+            
+    }
 
     /**
      * @param args the command line arguments
@@ -333,15 +354,19 @@ public class VuePraticien extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VuePraticien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VuePraticien.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VuePraticien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VuePraticien.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VuePraticien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VuePraticien.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VuePraticien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VuePraticien.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         }
-        //</editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -380,6 +405,6 @@ public class VuePraticien extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSpinner nbCoef;
+    private javax.swing.JTextPane nbCoef;
     // End of variables declaration//GEN-END:variables
 }

@@ -105,8 +105,7 @@ public class VueVisiteur extends javax.swing.JFrame {
                 try {
                     BtnOkActionPerformed(evt);
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
             }
         });
@@ -341,7 +340,7 @@ public class VueVisiteur extends javax.swing.JFrame {
     }
 
     private void BtnAjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAjoutActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_BtnAjoutActionPerformed
 
     private void BtnSupprActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnSupprActionPerformed
