@@ -40,7 +40,6 @@ public class VueVisiteur extends javax.swing.JFrame {
         LstLabo.setEnabled(false);
         LstSecteur.setEnabled(false);
         BtnEnregistre.setEnabled(false);
-        BtnSuppr.setEnabled(false);
         BtnAjout.setEnabled(false);
 
         try {
@@ -84,20 +83,11 @@ public class VueVisiteur extends javax.swing.JFrame {
         LstVis = new javax.swing.JComboBox<>();
         BtnAjout = new javax.swing.JButton();
         BtnEnregistre = new javax.swing.JButton();
-        BtnSuppr = new javax.swing.JButton();
         javax.swing.JToggleButton Btnretour = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Visiteurs");
         setAlwaysOnTop(true);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         BtnOk.setText("OK");
         BtnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -163,18 +153,7 @@ public class VueVisiteur extends javax.swing.JFrame {
                 try {
                     BtnEnregistreActionPerformed(evt);
                 } catch (SQLException e) {
-
-                }
-            }
-        });
-
-        BtnSuppr.setText("Supprimer");
-        BtnSuppr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    BtnSupprActionPerformed(evt);
-                } catch (SQLException e) {
-
+                    System.out.println(e.getMessage());
                 }
             }
         });
@@ -228,10 +207,8 @@ public class VueVisiteur extends javax.swing.JFrame {
                         .addGap(225, 225, 225)
                         .addComponent(BtnEnregistre)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnAjout)
-                        .addGap(28, 28, 28)
-                        .addComponent(BtnSuppr)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(BtnAjout)))
+                .addContainerGap(213, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(198, 198, 198)
                 .addComponent(Titre, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,8 +267,7 @@ public class VueVisiteur extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BtnEnregistre)
-                            .addComponent(BtnAjout)
-                            .addComponent(BtnSuppr))))
+                            .addComponent(BtnAjout))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -343,24 +319,10 @@ public class VueVisiteur extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BtnAjoutActionPerformed
 
-    private void BtnSupprActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnSupprActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Sûr de vouloir supprimer " + unVis.getVisNom() + " " + unVis.getVisPrenom()) == 0) {
-            int nbDelete = visiteurDAO.deleteVisiteur(unVis.getVisMatricule());
-            System.out.println(nbDelete);
-        }
-    }                                        
 
     private void LstVisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LstVisActionPerformed
 
     }//GEN-LAST:event_LstVisActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
-    }//GEN-LAST:event_formWindowClosed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        System.out.println("fermer la window");
-    }//GEN-LAST:event_formWindowClosing
 
     private void BtnretourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnretourActionPerformed
         Accueil accueil = new Accueil();
@@ -407,7 +369,6 @@ public class VueVisiteur extends javax.swing.JFrame {
     private javax.swing.JButton BtnAjout;
     private javax.swing.JButton BtnEnregistre;
     private javax.swing.JButton BtnOk;
-    private javax.swing.JButton BtnSuppr;
     private javax.swing.JLabel LblAdresse;
     private javax.swing.JLabel LblChercher;
     private javax.swing.JLabel LblLabo;

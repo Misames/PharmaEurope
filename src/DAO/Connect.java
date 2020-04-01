@@ -21,11 +21,14 @@ public class Connect {
     private static Statement stmt = null;
     private static ResultSet rs = null;
 
+    /**
+     * Constructeur de la calsse static
+     */
     public Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-            System.out.println("log : MySQL connecté from the class");
+            System.out.println("log : MySQL connecté depuis la classe");
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());

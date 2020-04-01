@@ -51,6 +51,7 @@ public class VueMedicament extends javax.swing.JFrame {
             TxtEffet.setText(lesMedic.get(num).getMedEffets());
             TxtNameCom.setText(lesMedic.get(num).getMedNomCommercial());
             Txtprix.setText(Float.toString(lesMedic.get(num).getMedPrixEchantillon()));
+            TxtCode.setEnabled(false);
         }
     }
 
@@ -134,7 +135,12 @@ public class VueMedicament extends javax.swing.JFrame {
         BtnSave.setText("Enregistrer");
         BtnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSaveActionPerformed(evt);
+                try {
+                    BtnSaveActionPerformed(evt);
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -284,8 +290,15 @@ public class VueMedicament extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnBackActionPerformed
 
-    private void BtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSaveActionPerformed
-        // TODO add your handling code here:
+    private void BtnSaveActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_BtnSaveActionPerformed
+        String code = FamilleDAO.getCodeFam((String) LstFam.getSelectedItem());
+        try {
+            int res = MedicDAO.setMedic(TxtCode.getText(), TxtNameCom.getText(), code, TxtCompo.getText(),
+                    TxtEffet.getText(), TxtContreIndic.getText(), Float.parseFloat(Txtprix.getText()));
+            System.out.println(res);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_BtnSaveActionPerformed
 
     private void btnPrecActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {// GEN-FIRST:event_btnPrecActionPerformed

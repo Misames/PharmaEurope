@@ -39,4 +39,19 @@ public class FamilleDAO {
         return res;
     }
 
+    /**
+     * Permet de recuperer le code de famille
+     * en fonction du libelle
+     * @param nom
+     * @return
+     * @throws SQLException
+     */
+    public String getCodeFam(String nom) throws SQLException {
+        String sql = "SELECT FAM_CODE FROM famille WHERE FAM_LIBELLE = '" + nom + "'";
+        stmt = connexion.createStatement();
+        rs = stmt.executeQuery(sql);
+        rs.next();
+        return rs.getString("FAM_CODE");
+    }
+
 }

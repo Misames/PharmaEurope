@@ -113,10 +113,12 @@ public class VisiteurDAO {
         else
             labo = "GY";
 
-        String sql = "UPDATE visiteur INNER JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE SET VIS_NOM = '" + nom
-                + "', VIS_PRENOM = '" + prenom + "', VIS_ADRESSE = '" + adresse + "', VIS_VILLE = '" + ville
-                + "', VIS_CP = '" + cp + "', SEC_CODE = '" + secteur.charAt(0) + "', visiteur.LAB_CODE = '" + labo
-                + "' WHERE VIS_MATRICULE = '" + matricule + "'";
+        String sql = "UPDATE visiteur "
+                    + "INNER JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE "
+                    + "SET VIS_NOM = '" + nom
+                    + "', VIS_PRENOM = '" + prenom + "', VIS_ADRESSE = '" + adresse + "', VIS_VILLE = '" + ville
+                    + "', VIS_CP = '" + cp + "', SEC_CODE = '" + secteur.charAt(0) + "', visiteur.LAB_CODE = '" + labo
+                    + "' WHERE VIS_MATRICULE = '" + matricule + "'";
         stmt = connexion.createStatement();
         return stmt.executeUpdate(sql);
     }

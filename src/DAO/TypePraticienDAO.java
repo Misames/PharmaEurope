@@ -39,4 +39,13 @@ public class TypePraticienDAO {
         }
         return res;
     }
+
+    public String getlTypePracticien(String nomType) throws SQLException {
+        String sql = "SELECT TYP_CODE FROM type_praticien WHERE TYP_LIBELLE = '" + nomType + "'";
+        stmt = connexion.createStatement();
+        rs = stmt.executeQuery(sql);
+        String res = rs.next() == true ? rs.getString(1) : null;
+        return res;
+    }
+
 }
