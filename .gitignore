@@ -35,7 +35,7 @@ dist/
 nbdist/
 .nb-gradle/
 
-### VisualStudioCode ###
+### Visual Studio Code ###
 .vscode
 task.txt
 

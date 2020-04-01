@@ -40,5 +40,4 @@ public class SecteurDAO {
         return res;
     }
 
-
 }

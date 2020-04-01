@@ -61,11 +61,11 @@ public class MedicamentDAO {
      * @return nombre de modification
      * @throws SQLException
      */
-    public int setMedic(String depo, String nom, String codeFam, String compo, String effets, String contreIndic, float prix) throws SQLException {
-        String sql = "UPDATE medicament " + "SET MED_NOMCOMMERCIAL = '" +
-                      nom + "', FAM_CODE = '" + codeFam + "', MED_COMPOSITION = '" + compo + "', MED_EFFETS = '" +
-                      effets + "', MED_CONTREINDIC = '" + contreIndic + "', MED_PRIXECHANTILLON = " + prix
-                      + " WHERE MED_DEPOTLEGAL = '" + depo + "'";
+    public int setMedic(String depo, String nom, String codeFam, String compo, String effets, String contreIndic,
+            float prix) throws SQLException {
+        String sql = "UPDATE medicament " + "SET MED_NOMCOMMERCIAL = '" + nom + "', FAM_CODE = '" + codeFam
+                + "', MED_COMPOSITION = '" + compo + "', MED_EFFETS = '" + effets + "', MED_CONTREINDIC = '"
+                + contreIndic + "', MED_PRIXECHANTILLON = " + prix + " WHERE MED_DEPOTLEGAL = '" + depo + "'";
         stmt = connexion.createStatement();
         return stmt.executeUpdate(sql);
     }

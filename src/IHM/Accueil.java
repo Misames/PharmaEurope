@@ -24,13 +24,6 @@ public class Accueil extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" Gestion des comptes");
-        addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
-            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
-                formAncestorMoved(evt);
-            }
-            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
-            }
-        });
 
         BtnCompteRendu.setText("Compte-rendus");
         BtnCompteRendu.addActionListener(new java.awt.event.ActionListener() {
@@ -114,10 +107,6 @@ public class Accueil extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_BtnVisiteurActionPerformed
-
-    private void formAncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_formAncestorMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formAncestorMoved
 
     /**
      * @param args the command line arguments

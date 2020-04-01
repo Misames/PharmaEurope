@@ -40,8 +40,8 @@ public class FamilleDAO {
     }
 
     /**
-     * Permet de recuperer le code de famille
-     * en fonction du libelle
+     * Permet de recuperer le code de famille en fonction du libelle
+     * 
      * @param nom
      * @return
      * @throws SQLException

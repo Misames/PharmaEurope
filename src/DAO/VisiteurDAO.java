@@ -29,14 +29,12 @@ public class VisiteurDAO {
         Labo unLab = null;
         Secteur unSecteur = null;
 
-        String sql = "SELECT * FROM visiteur " +
-                     "LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE " +
-                     "LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE " +
-                     "ORDER BY VIS_NOM";
+        String sql = "SELECT * FROM visiteur " + "LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE "
+                + "LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE " + "ORDER BY VIS_NOM";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
 
-        while(rs.next()) {
+        while (rs.next()) {
             String mat = rs.getString("VIS_MATRICULE");
             String nom = rs.getString("VIS_NOM");
             String prenom = rs.getString("VIS_PRENOM");
@@ -44,8 +42,7 @@ public class VisiteurDAO {
             String cp = rs.getString("VIS_CP");
             String ville = rs.getString("VIS_VILLE");
             Date dateEnbauche = rs.getDate("VIS_DATEEMBAUCHE");
-            
-            
+
             String labCode = rs.getString("LAB_CODE");
             String nomLabo = rs.getString("LAB_NOM");
             String chef = rs.getString("LAB_CHEFVENTE");
@@ -72,10 +69,9 @@ public class VisiteurDAO {
         Labo unLab = null;
         Secteur unSecteur = null;
 
-        String sql = "SELECT * FROM visiteur " +
-                     "LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE " +
-                     "LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE " +
-                     "WHERE VIS_NOM = '" + nom + "' AND VIS_PRENOM = '" + prenom + "'";
+        String sql = "SELECT * FROM visiteur " + "LEFT JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE "
+                + "LEFT JOIN secteur ON secteur.SEC_CODE = visiteur.SEC_CODE " + "WHERE VIS_NOM = '" + nom
+                + "' AND VIS_PRENOM = '" + prenom + "'";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
 
@@ -113,12 +109,10 @@ public class VisiteurDAO {
         else
             labo = "GY";
 
-        String sql = "UPDATE visiteur "
-                    + "INNER JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE "
-                    + "SET VIS_NOM = '" + nom
-                    + "', VIS_PRENOM = '" + prenom + "', VIS_ADRESSE = '" + adresse + "', VIS_VILLE = '" + ville
-                    + "', VIS_CP = '" + cp + "', SEC_CODE = '" + secteur.charAt(0) + "', visiteur.LAB_CODE = '" + labo
-                    + "' WHERE VIS_MATRICULE = '" + matricule + "'";
+        String sql = "UPDATE visiteur " + "INNER JOIN labo ON visiteur.LAB_CODE = labo.LAB_CODE " + "SET VIS_NOM = '"
+                + nom + "', VIS_PRENOM = '" + prenom + "', VIS_ADRESSE = '" + adresse + "', VIS_VILLE = '" + ville
+                + "', VIS_CP = '" + cp + "', SEC_CODE = '" + secteur.charAt(0) + "', visiteur.LAB_CODE = '" + labo
+                + "' WHERE VIS_MATRICULE = '" + matricule + "'";
         stmt = connexion.createStatement();
         return stmt.executeUpdate(sql);
     }

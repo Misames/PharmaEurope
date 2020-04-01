@@ -39,8 +39,8 @@ public class Connect {
     }
 
     public static boolean connexion(String id, String mdp) throws SQLException {
-        String sql = "SELECT * FROM pharmaeurope.visiteur " +
-                     "WHERE VIS_NOM = '" + id + "' AND VIS_DATEEMBAUCHE = '" + mdp + "'";
+        String sql = "SELECT * FROM pharmaeurope.visiteur " + "WHERE VIS_NOM = '" + id + "' AND VIS_DATEEMBAUCHE = '"
+                + mdp + "'";
         stmt = connexion.createStatement();
         rs = stmt.executeQuery(sql);
         return rs.next();
