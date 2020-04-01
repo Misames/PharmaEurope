@@ -8,6 +8,11 @@ public class Famille {
     private String famCode;
     private String famLibelle;
 
+    /**
+     * 
+     * @param code
+     * @param libelle
+     */
     public Famille(String code, String libelle) {
         famCode = code;
         famLibelle = libelle;

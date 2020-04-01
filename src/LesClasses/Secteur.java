@@ -8,6 +8,11 @@ public class Secteur {
     private String secCode;
     private String secLibelle;
 
+    /**
+     * 
+     * @param code
+     * @param libelle
+     */
     public Secteur(String code, String libelle) {
         secCode = code;
         secLibelle = libelle;

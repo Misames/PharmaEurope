@@ -8,6 +8,11 @@ public class Presentation {
     private String preCode;
     private String preLibelle;
 
+    /**
+     * 
+     * @param code
+     * @param libelle
+     */
     public Presentation(String code, String libelle) {
         preCode = code;
         preLibelle = libelle;

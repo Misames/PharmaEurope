@@ -8,6 +8,11 @@ public class Specialite {
     private String speCode;
     private String speLibelle;
 
+    /**
+     * 
+     * @param code
+     * @param libelle
+     */
     public Specialite(String code, String libelle) {
         speCode = code;
         speLibelle = libelle;

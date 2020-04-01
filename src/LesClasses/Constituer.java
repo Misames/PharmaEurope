@@ -11,6 +11,12 @@ public class Constituer {
     private ArrayList<Medicament> lesMedoc;
     private ArrayList<Composant> lesComposants;
 
+    /**
+     * 
+     * @param medoc
+     * @param composants
+     * @param qte
+     */
     public Constituer(ArrayList<Medicament> medoc, ArrayList<Composant> composants, int qte) {
         lesMedoc = medoc;
         lesComposants = composants;

@@ -10,6 +10,11 @@ public class Formuler {
     private ArrayList<Medicament> lesMedoc;
     private ArrayList<Presentation> lesPresentation;
 
+    /**
+     * 
+     * @param medoc
+     * @param presentation
+     */
     public Formuler(ArrayList<Medicament> medoc, ArrayList<Presentation> presentation) {
         lesMedoc = medoc;
         lesPresentation = presentation;

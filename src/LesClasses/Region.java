@@ -9,6 +9,12 @@ public class Region {
     private String regCode;
     private String regNom;
 
+    /**
+     * 
+     * @param secteur
+     * @param code
+     * @param nom
+     */
     public Region(Secteur secteur, String code, String nom) {
         regSecteur = secteur;
         regCode = code;

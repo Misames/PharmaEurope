@@ -14,6 +14,14 @@ public class RapportVisite {
     private String rapBilan;
     private String rapMotif;
 
+    /**
+     * 
+     * @param vis
+     * @param pra
+     * @param num
+     * @param bilan
+     * @param motif
+     */
     public RapportVisite(Visiteur vis, Praticien pra, int num, String bilan, String motif) {
         rapDate = new Date();
         visiteur = vis;

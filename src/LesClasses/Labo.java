@@ -9,6 +9,12 @@ public class Labo {
     private String labNom;
     private String labChefVente;
 
+    /**
+     * 
+     * @param code
+     * @param nom
+     * @param chef
+     */
     public Labo(String code, String nom, String chef) {
         labCode = code;
         labNom = nom;

@@ -8,6 +8,11 @@ public class Composant {
     private String cmpCode;
     private String cmpLibelle;
 
+    /**
+     * 
+     * @param code
+     * @param libelle
+     */
     public Composant(String code, String libelle) {
         cmpCode = code;
         cmpLibelle = libelle;

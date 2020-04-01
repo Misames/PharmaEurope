@@ -3,7 +3,7 @@ package LesClasses;
 import java.sql.Date;
 
 /**
- *
+ * 
  * @author François Bouscaillou
  */
 public class Visiteur {
@@ -20,7 +20,7 @@ public class Visiteur {
     private String visVille;
 
     /**
-     * 
+     * Constructeur de la classe
      * @param matricule
      * @param nom
      * @param prenom

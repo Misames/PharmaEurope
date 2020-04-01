@@ -12,6 +12,12 @@ public class Travailler {
     private Visiteur visiteur;
     private String traRole;
 
+    /**
+     * 
+     * @param reg
+     * @param vis
+     * @param role
+     */
     public Travailler(Region reg, Visiteur vis, String role) {
         dateTrvailler = new Date();
         region = reg;

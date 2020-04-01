@@ -11,6 +11,12 @@ public class Offrir {
     private HashMap<Medicament, Integer> lesMedoc;
     private Visiteur offrirVisiteur;
 
+    /**
+     * 
+     * @param rapports
+     * @param medicaments
+     * @param leVisiteur
+     */
     public Offrir(ArrayList<RapportVisite> rapports, HashMap<Medicament, Integer> medicaments, Visiteur leVisiteur) {
         lesRapport = rapports;
         lesMedoc = medicaments;

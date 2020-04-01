@@ -9,6 +9,12 @@ public class TypePracticien {
     private String typLibelle;
     private String typLieu;
 
+    /**
+     * 
+     * @param code
+     * @param libelle
+     * @param lieu
+     */
     public TypePracticien(String code, String libelle, String lieu) {
         typeCode = code;
         typLibelle = libelle;

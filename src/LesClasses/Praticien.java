@@ -15,6 +15,17 @@ public class Praticien {
     private float praCoefnotoriete;
     private TypePracticien typePracticien;
 
+    /**
+     * 
+     * @param num
+     * @param nom
+     * @param prenom
+     * @param adresse
+     * @param cp
+     * @param ville
+     * @param coef
+     * @param type
+     */
     public Praticien(String num, String nom, String prenom, String adresse, String cp, String ville, float coef,
             TypePracticien type) {
         praNum = num;

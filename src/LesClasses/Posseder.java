@@ -10,6 +10,13 @@ public class Posseder {
     private String posDiplome;
     private float posCoefPrescription;
 
+    /**
+     * 
+     * @param spe
+     * @param pra
+     * @param diplome
+     * @param coef
+     */
     public Posseder(Specialite spe, Praticien pra, String diplome, float coef) {
         spePosseder = spe;
         lePraticien = pra;
