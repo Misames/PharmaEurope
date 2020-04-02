@@ -39,7 +39,6 @@ public class LaboDAO {
             monLab = new Labo(code, nom, chef);
             res.add(monLab);
         }
-
         return res;
     }
 }

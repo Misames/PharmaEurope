@@ -26,6 +26,11 @@ public class MedicamentDAO {
         }
     }
 
+    /**
+     * 
+     * @return <p> retourne la listes des médicaments de la bdd </p>
+     * @throws SQLException
+     */
     public ArrayList<Medicament> getLesMedoc() throws SQLException {
         ArrayList<Medicament> res = new ArrayList<Medicament>();
         String sql = "SELECT * FROM medicament " + "INNER JOIN famille ON medicament.FAM_CODE = famille.FAM_CODE";
@@ -69,5 +74,36 @@ public class MedicamentDAO {
         stmt = connexion.createStatement();
         return stmt.executeUpdate(sql);
     }
+
+    /**
+     * 
+     * @param mediDepot
+     * @return retourne le médicament en donction du id
+     * @throws SQLException
+     */
+	public Medicament getLeMedoc(String mediDepot) throws SQLException {
+        Medicament res = null;
+        String sql = "SELECT * FROM medicament" +
+                     " INNER JOIN famille ON medicament.FAM_CODE = famille.FAM_CODE" +
+                     " WHERE MED_DEPOTLEGAL = '" + mediDepot + "'";
+        stmt = connexion.createStatement();
+        rs = stmt.executeQuery(sql);
+
+        if (rs.next()) {
+            String depot = rs.getString("MED_DEPOTLEGAL");
+            String nom = rs.getString("MED_NOMCOMMERCIAL");
+            String famCode = rs.getString("FAM_CODE");
+            String compo = rs.getString("MED_COMPOSITION");
+            String effets = rs.getString("MED_EFFETS");
+            String contreIndic = rs.getString("MED_CONTREINDIC");
+            float prix = rs.getFloat("MED_PRIXECHANTILLON");
+
+            String libelle = rs.getString("FAM_LIBELLE");
+            Famille laFamille = new Famille(famCode, libelle);
+            res = new Medicament(depot, nom, compo, effets, contreIndic, prix, laFamille);
+        }
+
+        return res;
+	}
 
 }

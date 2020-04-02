@@ -22,7 +22,7 @@ public class Connect {
     private static ResultSet rs = null;
 
     /**
-     * Constructeur de la calsse static
+     * Constructeur de la classe static
      */
     public Connect() {
         try {

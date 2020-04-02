@@ -8,7 +8,9 @@ package IHM;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import DAO.OffrirDAO;
 import DAO.RapportVisiteDAO;
+import LesClasses.Offrir;
 import LesClasses.RapportVisite;
 
 /**
@@ -18,7 +20,10 @@ import LesClasses.RapportVisite;
 public class VueRapportVis extends javax.swing.JFrame {
 
     private ArrayList<RapportVisite> lesRapport;
+    private ArrayList<Offrir> lesOffers;
     private RapportVisiteDAO rapDAO;
+    private OffrirDAO offrirDAO;
+    private int num;
 
     /**
      * Creates new form VueRapportVis
@@ -27,14 +32,22 @@ public class VueRapportVis extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         rapDAO = new RapportVisiteDAO();
+        offrirDAO = new OffrirDAO();
+        num = 0;
         try {
             lesRapport = rapDAO.getLesRapport();
+            lesOffers = offrirDAO.getMedicOffer(lesRapport.get(num));
+            if (lesOffers.isEmpty()) {
+                lesOffers = null;
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
-
-        for (RapportVisite rapportVisite : lesRapport) {
-            
+        } finally {
+            TxtNomPra.setText(lesRapport.get(num).getPraticien().getNom());
+            TxtBilan.setText(lesRapport.get(num).getRapBilan());
+            TxtMotif.setText(lesRapport.get(num).getRapMotif());
+            TxtNumRap.setText(lesRapport.get(num).getRapNum());
+            TxtDate.setText(lesRapport.get(num).getRapDate().toString());
         }
 
     }
@@ -56,25 +69,26 @@ public class VueRapportVis extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         BtnPrec = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnNext = new javax.swing.JButton();
+        BtnNew = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TblMedic = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jButton4 = new javax.swing.JButton();
+        TxtNumRap = new javax.swing.JTextPane();
+        btnDetails = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        TxtNomPra = new javax.swing.JTextPane();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
+        TxtDate = new javax.swing.JTextPane();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextPane4 = new javax.swing.JTextPane();
+        TxtMotif = new javax.swing.JTextPane();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TxtBilan = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rapport de visite");
+        setResizable(false);
 
         BtnRetour.setText("Retour");
         BtnRetour.addActionListener(new java.awt.event.ActionListener() {
@@ -105,16 +119,16 @@ public class VueRapportVis extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Suivant");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnNext.setText("Suivant");
+        BtnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnNextActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Nouveau");
+        BtnNew.setText("Nouveau");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TblMedic.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -125,23 +139,23 @@ public class VueRapportVis extends javax.swing.JFrame {
                 "Médicament", "Quantité"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TblMedic);
 
-        jScrollPane2.setViewportView(jTextPane1);
+        jScrollPane2.setViewportView(TxtNumRap);
 
-        jButton4.setText("Détaille");
+        btnDetails.setText("Détaille");
 
-        jScrollPane3.setViewportView(jTextPane2);
+        jScrollPane3.setViewportView(TxtNomPra);
 
-        jScrollPane4.setViewportView(jTextPane3);
+        jScrollPane4.setViewportView(TxtDate);
 
-        jScrollPane5.setViewportView(jTextPane4);
+        jScrollPane5.setViewportView(TxtMotif);
 
         jLabel6.setText("Bilan");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane6.setViewportView(jTextArea1);
+        TxtBilan.setColumns(20);
+        TxtBilan.setRows(5);
+        jScrollPane6.setViewportView(TxtBilan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,18 +169,18 @@ public class VueRapportVis extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                                     .addComponent(jScrollPane3)
                                     .addComponent(jScrollPane4)
                                     .addComponent(jScrollPane5))
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4)
+                                .addComponent(btnDetails)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,12 +192,12 @@ public class VueRapportVis extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(51, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnPrec, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(263, 263, 263)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(253, 253, 253)
                         .addComponent(BtnRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(135, 135, 135)))
@@ -200,7 +214,7 @@ public class VueRapportVis extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton4)
+                            .addComponent(btnDetails)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -221,11 +235,11 @@ public class VueRapportVis extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
+                            .addComponent(BtnNext)
                             .addComponent(BtnRetour)
-                            .addComponent(jButton3)
+                            .addComponent(BtnNew)
                             .addComponent(BtnPrec))
                         .addGap(73, 73, 73))
                     .addGroup(layout.createSequentialGroup()
@@ -243,21 +257,49 @@ public class VueRapportVis extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnRetourActionPerformed
 
     private void BtnPrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrecActionPerformed
-        // TODO add your handling code here:
+        if (--num < 0)
+            num = 0;
+        TxtNomPra.setText(lesRapport.get(num).getPraticien().getNom() + lesRapport.get(num).getPraticien().getPraPrenom());
+        TxtNumRap.setText(lesRapport.get(num).getRapNum());
+        TxtDate.setText(lesRapport.get(num).getRapDate().toString());
+        TxtBilan.setText(lesRapport.get(num).getRapBilan());
+        TxtMotif.setText(lesRapport.get(num).getRapMotif());
     }//GEN-LAST:event_BtnPrecActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BtnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNextActionPerformed
+        if (++num >= lesRapport.size())
+            num = lesRapport.size() - 1;
+        TxtNomPra.setText(lesRapport.get(num).getPraticien().getNom() + lesRapport.get(num).getPraticien().getPraPrenom());
+        TxtNumRap.setText(lesRapport.get(num).getRapNum());
+        TxtDate.setText(lesRapport.get(num).getRapDate().toString());
+        TxtBilan.setText(lesRapport.get(num).getRapBilan());
+        TxtMotif.setText(lesRapport.get(num).getRapMotif());
+        try {
+            lesOffers = offrirDAO.getMedicOffer(lesRapport.get(num));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            if (lesOffers.isEmpty()) {
+                lesOffers = null;
+            }
+        } finally {
+            for (Offrir unOffer : lesOffers) {
+                System.out.println(unOffer.getQte() + " " + unOffer.getLesMedoc().getMedDepotLegal());
+            }
+        }
+
+    }// GEN-LAST:event_BtnNextActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -267,15 +309,19 @@ public class VueRapportVis extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VueRapportVis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueRapportVis.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VueRapportVis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueRapportVis.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VueRapportVis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueRapportVis.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VueRapportVis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueRapportVis.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         }
-        //</editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -286,11 +332,17 @@ public class VueRapportVis extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnNew;
+    private javax.swing.JButton BtnNext;
     private javax.swing.JButton BtnPrec;
     private javax.swing.JButton BtnRetour;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JTable TblMedic;
+    private javax.swing.JTextArea TxtBilan;
+    private javax.swing.JTextPane TxtDate;
+    private javax.swing.JTextPane TxtMotif;
+    private javax.swing.JTextPane TxtNomPra;
+    private javax.swing.JTextPane TxtNumRap;
+    private javax.swing.JButton btnDetails;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -304,11 +356,5 @@ public class VueRapportVis extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
-    private javax.swing.JTextPane jTextPane4;
     // End of variables declaration//GEN-END:variables
 }

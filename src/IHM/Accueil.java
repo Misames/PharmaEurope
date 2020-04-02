@@ -6,6 +6,8 @@ package IHM;
  */
 public class Accueil extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Creates new form Accueil
      */
@@ -24,6 +26,14 @@ public class Accueil extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" Gestion des comptes");
+        setResizable(false);
+        addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+                ancestorMoved(evt);
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+            }
+        });
 
         BtnCompteRendu.setText("Compte-rendus");
         BtnCompteRendu.addActionListener(new java.awt.event.ActionListener() {
