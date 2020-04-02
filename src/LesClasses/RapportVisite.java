@@ -9,7 +9,7 @@ public class RapportVisite {
 
     private Visiteur visiteur;
     private Praticien praticien;
-    private int rapNum;
+    private String rapNum;
     private Date rapDate;
     private String rapBilan;
     private String rapMotif;
@@ -22,8 +22,8 @@ public class RapportVisite {
      * @param bilan
      * @param motif
      */
-    public RapportVisite(Visiteur vis, Praticien pra, int num, String bilan, String motif) {
-        rapDate = new Date();
+    public RapportVisite(Visiteur vis, Praticien pra, String num, String bilan, String motif, Date date) {
+        rapDate = date;
         visiteur = vis;
         praticien = pra;
         rapNum = num;
@@ -47,11 +47,11 @@ public class RapportVisite {
         this.praticien = praticien;
     }
 
-    public int getRapNum() {
+    public String getRapNum() {
         return rapNum;
     }
 
-    public void setRapNum(int rapNum) {
+    public void setRapNum(String rapNum) {
         this.rapNum = rapNum;
     }
 

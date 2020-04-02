@@ -5,11 +5,20 @@
  */
 package IHM;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import DAO.RapportVisiteDAO;
+import LesClasses.RapportVisite;
+
 /**
  *
  * @author François Bouscaillou
  */
 public class VueRapportVis extends javax.swing.JFrame {
+
+    private ArrayList<RapportVisite> lesRapport;
+    private RapportVisiteDAO rapDAO;
 
     /**
      * Creates new form VueRapportVis
@@ -17,6 +26,17 @@ public class VueRapportVis extends javax.swing.JFrame {
     public VueRapportVis() {
         initComponents();
         setLocationRelativeTo(null);
+        rapDAO = new RapportVisiteDAO();
+        try {
+            lesRapport = rapDAO.getLesRapport();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        for (RapportVisite rapportVisite : lesRapport) {
+            
+        }
+
     }
 
     /**

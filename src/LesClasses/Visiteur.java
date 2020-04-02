@@ -31,8 +31,7 @@ public class Visiteur {
      * @param secteur
      * @param lab
      */
-    public Visiteur(String matricule, String nom, String prenom, String adresse, String cp, String ville, Date dateEnbauche,
-            Secteur secteur, Labo lab) {
+    public Visiteur(String matricule, String nom, String prenom, String adresse, String cp, String ville, Date dateEnbauche, Secteur secteur, Labo lab) {
         try {
             visSecteur = secteur;
             visLabo = lab;
