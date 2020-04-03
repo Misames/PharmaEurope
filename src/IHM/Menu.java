@@ -12,7 +12,6 @@ import DAO.Connect;
  */
 public class Menu extends javax.swing.JFrame {
 
-    private static final long serialVersionUID = 1L;
     private Connection connexion;
 
     /**
