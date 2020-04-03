@@ -43,7 +43,6 @@ public class VueVisiteur extends javax.swing.JFrame {
         LstLabo.setEnabled(false);
         LstSecteur.setEnabled(false);
         BtnEnregistre.setEnabled(false);
-        BtnAjout.setEnabled(false);
 
         try {
             visiteurDAO = new VisiteurDAO();
@@ -321,7 +320,9 @@ public class VueVisiteur extends javax.swing.JFrame {
     }
 
     private void BtnAjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAjoutActionPerformed
-        
+        NewVisiteur vueAddVis = new NewVisiteur(this);
+        vueAddVis.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BtnAjoutActionPerformed
 
 

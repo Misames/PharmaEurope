@@ -40,7 +40,7 @@ public class VueRapportVis extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(windowEvent.getWindow(),
-                        "Sûr de vouloir de fermer la fenêtre ?", "Fermer la fenêtre ?", JOptionPane.YES_NO_OPTION,
+                        "Sût de vouloir fermer l'application ?", "Fermer la fenêtre ?", JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     System.exit(0);
                 }
@@ -312,7 +312,7 @@ public class VueRapportVis extends javax.swing.JFrame {
     
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
         System.out.println("clic clic");
-        NewRapport vueRapport = new NewRapport();
+        NewRapport vueRapport = new NewRapport(this);
         vueRapport.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BtnNewActionPerformed
