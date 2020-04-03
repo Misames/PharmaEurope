@@ -7,6 +7,7 @@ package IHM;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.*;
 
 import DAO.FamilleDAO;
 import DAO.MedicamentDAO;
@@ -29,6 +30,8 @@ public class VueMedicament extends javax.swing.JFrame {
      */
     public VueMedicament() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage(".\\src\\img\\dispensary.png");
+        this.setIconImage(icon);
         setLocationRelativeTo(null);
         MedicDAO = new MedicamentDAO();
         FamilleDAO = new FamilleDAO();

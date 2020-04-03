@@ -3,6 +3,7 @@ package IHM;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.awt.*;
 
 import DAO.Connect;
 
@@ -23,6 +24,23 @@ public class Menu extends javax.swing.JFrame {
     public Menu() throws ClassNotFoundException, SQLException {
         initComponents();
         setLocationRelativeTo(null);
+        Image icon = Toolkit.getDefaultToolkit().getImage(".\\src\\img\\dispensary.png");
+        this.setIconImage(icon);
+
+        this.setDefaultCloseOperation(Menu.DO_NOTHING_ON_CLOSE);
+
+        /* Some piece of code */
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(windowEvent.getWindow(),
+                        "Sûr de vouloir de fermer la fenêtre ?", "Fermer la fenêtre ?", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated

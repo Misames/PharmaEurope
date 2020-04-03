@@ -2,6 +2,7 @@ package IHM;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.awt.*;
 
 import DAO.LaboDAO;
 import DAO.SecteurDAO;
@@ -28,6 +29,8 @@ public class VueVisiteur extends javax.swing.JFrame {
      */
     public VueVisiteur() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage(".\\src\\img\\dispensary.png");
+        this.setIconImage(icon);
         setLocationRelativeTo(null);
         LstLabo.removeAllItems();
         LstSecteur.removeAllItems();

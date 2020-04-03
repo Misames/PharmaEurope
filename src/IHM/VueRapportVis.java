@@ -7,7 +7,10 @@ package IHM;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 import DAO.OffrirDAO;
 import DAO.RapportVisiteDAO;
@@ -32,6 +35,17 @@ public class VueRapportVis extends javax.swing.JFrame {
     public VueRapportVis() {
         initComponents();
         setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(NewRapport.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(windowEvent.getWindow(),
+                        "Sûr de vouloir de fermer la fenêtre ?", "Fermer la fenêtre ?", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
         rapDAO = new RapportVisiteDAO();
         offrirDAO = new OffrirDAO();
         num = 0;
@@ -44,13 +58,16 @@ public class VueRapportVis extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-            TxtNomPra.setText(lesRapport.get(num).getPraticien().getNom());
+            TxtNomPra.setText(lesRapport.get(num).getPraticien().getNom() + " " + lesRapport.get(num).getPraticien().getPraPrenom());
             TxtBilan.setText(lesRapport.get(num).getRapBilan());
             TxtMotif.setText(lesRapport.get(num).getRapMotif());
             TxtNumRap.setText(lesRapport.get(num).getRapNum());
             TxtDate.setText(lesRapport.get(num).getRapDate().toString());
-            btnDetails.setEnabled(false);
+            btnDetails.setEnabled(true);
             BtnNew.setEnabled(true);
+            TxtNumRap.setEnabled(false);
+            Image icon = Toolkit.getDefaultToolkit().getImage(".\\src\\img\\dispensary.png");
+            this.setIconImage(icon);
         }
 
     }
@@ -288,7 +305,9 @@ public class VueRapportVis extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnPlusActionPerformed
 
     private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
-        //
+        this.setVisible(false);
+        VueDetails vueDetail = new VueDetails();
+        vueDetail.setVisible(true);
     }//GEN-LAST:event_btnDetailsActionPerformed
     
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed

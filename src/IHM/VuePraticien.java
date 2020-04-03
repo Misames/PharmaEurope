@@ -3,6 +3,7 @@ package IHM;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.awt.*;
 
 import DAO.PraticienDAO;
 import DAO.TypePraticienDAO;
@@ -27,6 +28,10 @@ public class VuePraticien extends javax.swing.JFrame {
    */
   public VuePraticien() {
     initComponents();
+
+    Image icon = Toolkit.getDefaultToolkit().getImage(".\\src\\img\\dispensary.png");
+    this.setIconImage(icon);
+
     LstLieu.removeAllItems();
     LstLieu.setEnabled(false);
     LstPra.removeAllItems();

@@ -5,6 +5,8 @@
  */
 package IHM;
 
+import java.awt.*;
+
 /**
  *
  * @author François Bouscaillou
@@ -16,6 +18,8 @@ public class NewVisiteur extends javax.swing.JFrame {
      */
     public NewVisiteur() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage(".\\src\\img\\dispensary.png");
+        this.setIconImage(icon);
     }
 
     /**
